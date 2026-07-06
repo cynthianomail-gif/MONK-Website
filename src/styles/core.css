@@ -1,0 +1,192 @@
+/* core.css — 全站系統樣式（spec §4）：mute 鈕、佛珠導航、墨點游標 */
+
+/* ---- 4.2 mute 鈕（右上角固定） ---- */
+
+#mute-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 500;
+  background: var(--ink-black);
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  padding: 0.4em 0.9em;
+  font-size: 0.85rem;
+  font-family: 'Noto Serif TC', serif;
+  transition: transform 0.15s var(--ease-brush), color 0.15s var(--ease-brush);
+}
+
+#mute-toggle:hover {
+  transform: translateY(-2px);
+  color: var(--paper);
+}
+
+/* ---- 4.3 佛珠導航（桌面） ---- */
+
+#beads-nav {
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+}
+
+.beads-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+  overflow: visible;
+}
+
+.beads-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.bead {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0.35rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bead-dot circle {
+  fill: var(--gold-dim);
+  transition: fill 0.2s var(--ease-brush);
+}
+
+.bead.active .bead-dot circle {
+  fill: var(--gold);
+  filter: drop-shadow(0 0 6px var(--gold));
+}
+
+.bead-tooltip {
+  position: absolute;
+  right: calc(100% + 0.6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ink-black);
+  color: var(--gold);
+  padding: 0.3em 0.9em;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s var(--ease-brush);
+}
+
+.bead:hover .bead-tooltip,
+.bead:focus-visible .bead-tooltip {
+  opacity: 1;
+}
+
+/* ---- 4.3 行動版：底部金色細進度條 ---- */
+
+#beads-progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--paper-10);
+  z-index: 400;
+}
+
+#beads-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  transition: width 0.1s linear;
+}
+
+@media (max-width: 767px) {
+  #beads-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #beads-progress {
+    display: none;
+  }
+}
+
+/* ---- 4.4 墨點游標（僅桌面 hover-capable，由 cursor.ts 加 .cursor-none class） ---- */
+
+html.cursor-none,
+html.cursor-none * {
+  cursor: none !important;
+}
+
+.ink-cursor-dot,
+.ink-cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+}
+
+.ink-cursor-dot {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--ink-black);
+  outline: 1px solid var(--paper-10);
+}
+
+.ink-cursor-ring {
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-60);
+  transition: width 0.2s var(--ease-brush), height 0.2s var(--ease-brush), margin 0.2s var(--ease-brush), border-color 0.2s var(--ease-brush);
+}
+
+.ink-cursor-ring--active {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-color: var(--gold);
+}
+
+.ink-cursor-splat {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--ink-black);
+  pointer-events: none;
+  z-index: 9997;
+  animation: ink-splat-burst 0.6s var(--ease-brush) forwards;
+}
+
+@keyframes ink-splat-burst {
+  from {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+    opacity: 0;
+  }
+}

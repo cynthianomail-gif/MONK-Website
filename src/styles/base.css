@@ -90,6 +90,14 @@ ul, ol {
   box-shadow: none;
 }
 
+/* ---- brush-reveal（spec §6.2，通用筆刷揭示，由 core/reveal.ts 的 --p 驅動） ---- */
+
+.brush-reveal {
+  --p: 0%;
+  -webkit-mask-image: linear-gradient(105deg, #000 var(--p), transparent calc(var(--p) + 12%));
+  mask-image: linear-gradient(105deg, #000 var(--p), transparent calc(var(--p) + 12%));
+}
+
 /* ---- sr-only ---- */
 
 .sr-only {
