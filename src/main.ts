@@ -42,7 +42,3 @@ initBeads();
 if (!reduced) {
   initCursor();
 }
-
-// TODO M2: loader 木魚點擊→ audio.unlock() → inkReveal 互動邏輯尚未實作。
-// M0/M1 骨架階段先隱藏 overlay，避免擋住七區骨架驗收；M2 施工時移除下面這行並接上真實互動。
-document.getElementById('loader')?.setAttribute('style', 'display:none');

@@ -1,4 +1,4 @@
-/* loader.css — 進站儀式（overlay，不算 section）*/
+/* loader.css — 進站儀式（overlay，不算 section，spec §5.1）*/
 
 #loader {
   position: fixed;
@@ -12,16 +12,34 @@
   background: var(--ink-black);
 }
 
-#loader .loader-woodfish {
-  width: 120px;
-  height: 120px;
-  filter: grayscale(1) brightness(0.6);
+#loader .loader-woodfish-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
   cursor: not-allowed;
+}
+
+#loader .loader-woodfish {
+  width: 140px;
+  height: 140px;
+  filter: grayscale(1) brightness(0.55);
+  transition: filter 0.4s var(--ease-brush);
+}
+
+/* 資產載入完成：金色呼吸光、可點（spec §5.1） */
+#loader.ready .loader-woodfish-btn {
+  cursor: pointer;
 }
 
 #loader.ready .loader-woodfish {
   filter: none;
-  cursor: pointer;
+  animation: loader-breath 2.4s ease-in-out infinite;
+}
+
+@keyframes loader-breath {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(232, 184, 75, 0.35)); }
+  50%      { filter: drop-shadow(0 0 22px rgba(232, 184, 75, 0.75)); }
 }
 
 #loader .loader-hint {
@@ -36,14 +54,32 @@
   right: 1.5rem;
   bottom: 1.5rem;
   font-size: 0.8rem;
-  color: var(--ink-60);
+  font-weight: 400;
+  color: rgba(242, 234, 216, 0.55);
   background: none;
   border: none;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.5s var(--ease-brush);
 }
 
 #loader.skippable .loader-skip {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* reduced-motion：呼吸光停（base.css 全域已把 animation-duration 壓到 0.01ms，這裡明確關掉） */
+@media (prefers-reduced-motion: reduce) {
+  #loader.ready .loader-woodfish {
+    animation: none;
+    filter: drop-shadow(0 0 12px rgba(232, 184, 75, 0.6));
+  }
+}
+
+/* 375px 行動版：木魚縮小，避免與提示字擠壓 */
+@media (max-width: 480px) {
+  #loader .loader-woodfish {
+    width: 110px;
+    height: 110px;
+  }
 }

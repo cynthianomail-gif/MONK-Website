@@ -98,6 +98,16 @@ ul, ol {
   mask-image: linear-gradient(105deg, #000 var(--p), transparent calc(var(--p) + 12%));
 }
 
+/* ---- 紙紋（§3.2）：紙白區疊低透明度紙紋 tile（Codex paper_tile.webp，978B） ----
+   選擇器加 main section 提高特異度，蓋過 section 檔的 `background: var(--paper)` 簡寫。 */
+
+main section#gameplay,
+main section#gallery {
+  background-color: var(--paper);
+  background-image: linear-gradient(rgba(242, 234, 216, 0.5), rgba(242, 234, 216, 0.5)), url('/media/img/paper_tile.webp');
+  background-repeat: repeat;
+}
+
 /* ---- sr-only ---- */
 
 .sr-only {

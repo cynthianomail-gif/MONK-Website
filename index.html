@@ -9,19 +9,34 @@
 <body>
   <!-- Loader（overlay，不算 section，spec §5.1） -->
   <div id="loader" role="dialog" aria-label="進站儀式">
-    <img class="loader-woodfish" src="/media/img/woodfish.svg" alt="" aria-hidden="true" />
+    <button class="loader-woodfish-btn" type="button" aria-disabled="true" aria-label="叩木魚，開山門">
+      <img class="loader-woodfish" src="/media/img/woodfish.webp" alt="" width="512" height="512" />
+    </button>
     <p class="loader-hint">叩木魚，開山門</p>
     <button class="loader-skip" type="button">直接進入</button>
   </div>
 
   <main>
-    <!-- 1. Hero -->
+    <!-- 1. Hero（§5.2；PV 實錄未到位：poster 靜態佔位，video 結構空掛 data-placeholder） -->
     <section id="hero" aria-labelledby="hero-heading">
-      <div class="section-inner">
-        <h1 id="hero-heading">和尚逆天</h1>
-        <p><!-- TODO M1: strings.json --> 破戒之僧，逆天而行——佔位文案，正式文案待 strings.json 接入</p>
+      <div class="hero-bg" aria-hidden="true">
+        <picture>
+          <source srcset="/media/img/poster.avif" type="image/avif" />
+          <img class="hero-poster" src="/media/img/poster.webp" alt="" width="1920" height="1072" fetchpriority="high" />
+        </picture>
+        <video class="hero-video" muted autoplay loop playsinline preload="none"
+               poster="/media/img/poster.webp" data-placeholder>
+          <source data-src="" type="video/webm" />
+          <source data-src="" type="video/mp4" />
+        </video>
+        <div class="hero-shade"></div>
+      </div>
+      <div class="section-inner hero-fg">
+        <!-- Logo 圖未到位：文字排版佔位（Noto Serif TC 900），等 Codex logo -->
+        <h1 id="hero-heading" class="hero-logo" data-todo>和尚逆天</h1>
+        <p class="hero-tagline"><!-- TODO: strings.json --> 破戒之僧，逆天而行——佔位文案，正式文案待 strings.json 接入</p>
         <div class="hero-cta-row">
-          <a class="cut-btn" href="#" data-todo>▶ 觀看完整 PV</a>
+          <button class="cut-btn hero-pv-btn" type="button">▶ 觀看完整 PV</button>
           <a class="cut-btn" href="#" data-todo>下載 Demo</a>
         </div>
       </div>
@@ -80,6 +95,12 @@
       <p class="footer-credit"><!-- TODO M1: strings.json --> 以 AI 輔助製作 ／ © 2026 {團隊名，待確認}</p>
     </section>
   </main>
+
+  <!-- PV lightbox 骨架（§5.2；內容佔位，PV 成片後換 <video>） -->
+  <div id="pv-lightbox" role="dialog" aria-modal="true" aria-label="完整 PV" hidden>
+    <button class="pv-lightbox-close" type="button" aria-label="關閉">✕</button>
+    <p class="pv-lightbox-placeholder" data-todo>PV 製作中</p>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
