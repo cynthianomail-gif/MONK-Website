@@ -11,6 +11,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { lenis } from '../core/scroll';
 import { prefersReducedMotion } from '../core/utils';
+import { initSuminagashi } from '../core/suminagashi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,12 +41,15 @@ function initParallax() {
   });
 }
 
-// ---- 往下捲：影片容器 scale 1 → 0.92（scrub；reduced-motion 關） ----
+// ---- 往下捲：背景容器 scale 1 → 0.92（scrub；reduced-motion 關） ----
+// M2.5：suminagashi canvas 直插 #hero（不在 .hero-bg 內），scrub 目標要一併帶上（§6.5）。
 
-function initScrollScale() {
-  if (!hero || !bg || prefersReducedMotion()) return;
+function initScrollScale(extraTargets: Element[]) {
+  if (!hero || prefersReducedMotion()) return;
+  const targets: Element[] = bg ? [bg, ...extraTargets] : extraTargets;
+  if (targets.length === 0) return;
   gsap.fromTo(
-    bg,
+    targets,
     { scale: 1 },
     {
       scale: 0.92,
@@ -95,6 +99,13 @@ function initLightbox() {
   });
 }
 
+// ---- M2.5 suminagashi 墨流體背景（spec §6.5） ----
+// null＝降級（WebGL 不可用／reduced-motion）→ 不加 class、poster 靜態背景自然露出。
+// 成功時加 hero--fluid：藏 hero-shade、前景文字轉墨黑（paper 底上的對比，hero.css）。
+
+const fluid = hero ? initSuminagashi(hero) : null;
+if (fluid && hero) hero.classList.add('hero--fluid');
+
 initParallax();
-initScrollScale();
+initScrollScale(fluid ? [fluid.canvas] : []);
 initLightbox();
