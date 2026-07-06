@@ -1,25 +1,230 @@
-/* story.css — 5.3 水墨絵巻（墨黑底，M3 才做橫向捲軸邏輯，此檔僅骨架樣式） */
+/* story.css — 5.3 水墨絵巻（橫向捲軸，技術重點區）
+   佔位素材：遠景=CSS 漸層（墨黑→暗藍灰）；中景=戰鬥背景 hstack 拼接長圖 story_mid.webp（4000x1080）；
+   前景=文案卡＋無戒去背立繪 story_fg_wujie.webp 點綴。日後正式絵巻長圖到位只換 img src。 */
 
 #story {
   position: relative;
-  min-height: 100dvh;
   background: var(--ink-black);
   color: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6rem 2rem;
+  overflow: hidden;
   clip-path: polygon(0 6vw, 100% 0, 100% 100%, 0 94%);
   margin-top: -6vw;
   margin-bottom: -6vw;
 }
 
-#story .section-inner {
-  max-width: 960px;
-  text-align: center;
+/* ---- pin 舞台（桌面/平板：JS 建 pin，此為視覺容器） ---- */
+
+#story .story-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
-#story h2 {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+/* sr-only 標題：畫面不顯示（絵巻本身是視覺敘事），但保留給 AT／SEO */
+#story .story-heading-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- 三層視差（transform-only，will-change） ---- */
+
+#story .scroll-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  will-change: transform;
+}
+
+/* 遠景：純色漸層（墨黑→暗藍灰），無素材依賴，寬度覆蓋整個橫移行程 */
+#story .story-layer-far {
+  width: 400vw;
+  background: linear-gradient(
+    90deg,
+    #14120f 0%,
+    #1c2430 20%,
+    #223148 40%,
+    #1c2430 60%,
+    #221d2c 80%,
+    #14120f 100%
+  );
+}
+
+/* 遠景疊加的簡易「山際線／天際線」剪影，CSS gradient 做的鋸齒感（zero-asset 佔位） */
+#story .story-layer-far::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    100deg,
+    rgba(20, 18, 15, 0.55) 0 3vw,
+    rgba(20, 18, 15, 0.15) 3vw 6vw
+  );
+  opacity: 0.6;
+}
+
+/* 中景：戰鬥背景 hstack 拼接長圖（佔位），data-placeholder 標記等待正式絵巻長圖 */
+#story .story-layer-mid {
+  width: 300vw;
+  background-image: url('/media/img/story_mid.webp');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: left center;
+  opacity: 0.92;
+}
+
+/* 前景：文案卡＋人物立繪點綴所在層 */
+#story .story-layer-fg {
+  width: 300vw;
+}
+
+#story .story-fg-figure {
+  position: absolute;
+  bottom: 0;
+  left: 62vw;
+  height: 62%;
+  opacity: 0.96;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+#story .story-fg-figure img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* ---- 文案卡（4 張，沿途出現，絕對定位於前景層不同 x） ---- */
+
+#story .story-card {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(360px, 70vw);
+  padding: 1.5rem 1.75rem;
+  background: rgba(20, 18, 15, 0.72);
+  border: 1px solid var(--gold-dim);
+  color: var(--paper);
+  clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 100%);
+  backdrop-filter: blur(2px);
+}
+
+#story .story-card p {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 1.7;
+}
+
+#story .story-card[data-card='0'] { left: 6vw; }
+#story .story-card[data-card='1'] { left: 100vw; }
+#story .story-card[data-card='2'] { left: 190vw; }
+
+/* 卡4：名牌樣式（萬神殿集團 PANTHEON GROUP），承 spec §3.2 金名牌語言 */
+#story .story-card[data-card='3'] {
+  left: 268vw;
+  background: var(--ink-black);
+  border: none;
+  border-left: 6px solid var(--vermilion);
+  padding: 1.25rem 2rem;
+  clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+}
+
+#story .story-card[data-card='3'] p {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
   color: var(--gold);
+  letter-spacing: 0.08em;
+}
+
+#story .story-card[data-card='3'] .story-card-sub {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--paper-10);
+  color: rgba(242, 234, 216, 0.6);
+  letter-spacing: 0.25em;
+  margin-top: 0.35rem;
+}
+
+/* ---- 頭尾墨暈淡出到墨黑（CSS gradient overlay，transform-only 層之外的靜態疊層） ---- */
+
+#story .story-fade-edge {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 14vw;
+  z-index: 5;
+  pointer-events: none;
+}
+
+#story .story-fade-edge--start {
+  left: 0;
+  background: linear-gradient(90deg, var(--ink-black) 0%, transparent 100%);
+}
+
+#story .story-fade-edge--end {
+  right: 0;
+  background: linear-gradient(270deg, var(--ink-black) 0%, transparent 100%);
+}
+
+/* ---- 行動版 / reduced-motion：不 pin，退化為直向排列 ---- */
+
+.story-mobile-fallback #story .story-stage {
+  height: auto;
+  overflow: visible;
+}
+
+.story-mobile-fallback #story .scroll-layer {
+  position: relative;
+  width: 100% !important;
+  height: auto;
+  transform: none !important;
+}
+
+.story-mobile-fallback #story .story-layer-far {
+  display: none;
+}
+
+.story-mobile-fallback #story .story-layer-mid {
+  height: 46vh;
+  min-height: 260px;
+  background-size: cover;
+  background-position: center;
+}
+
+.story-mobile-fallback #story .story-fg-figure {
+  display: none;
+}
+
+.story-mobile-fallback #story .story-layer-fg {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.story-mobile-fallback #story .story-card {
+  position: relative;
+  top: auto;
+  left: auto !important;
+  transform: none;
+  width: 100%;
+}
+
+.story-mobile-fallback #story .story-fade-edge {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  #story .story-stage {
+    height: auto;
+  }
 }

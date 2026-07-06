@@ -42,11 +42,32 @@
       </div>
     </section>
 
-    <!-- 2. Story -->
+    <!-- 2. Story（§5.3 水墨絵巻・橫向捲軸，M3；佔位素材見 story.css 頂部註解） -->
     <section id="story" aria-labelledby="story-heading">
-      <div class="section-inner">
-        <h2 id="story-heading">水墨絵巻・世界觀</h2>
-        <p><!-- TODO M1: strings.json --> 新梵市、萬神殿集團、破戒僧的逆天之路——佔位文案</p>
+      <h2 id="story-heading" class="story-heading-sr">水墨絵巻・世界觀</h2>
+      <div class="story-stage">
+        <div class="scroll-layer story-layer-far" data-speed="0.4" aria-hidden="true"></div>
+        <div class="scroll-layer story-layer-mid" data-speed="0.7" data-placeholder aria-hidden="true"></div>
+        <div class="scroll-layer story-layer-fg" data-speed="1">
+          <div class="story-fg-figure" aria-hidden="true" data-placeholder>
+            <img src="/media/img/story_fg_wujie.webp" alt="" width="614" height="1200" loading="lazy" />
+          </div>
+          <div class="story-card" data-card="0">
+            <p></p>
+          </div>
+          <div class="story-card" data-card="1">
+            <p></p>
+          </div>
+          <div class="story-card" data-card="2">
+            <p></p>
+          </div>
+          <div class="story-card" data-card="3">
+            <p></p>
+            <p class="story-card-sub">PANTHEON GROUP</p>
+          </div>
+        </div>
+        <div class="story-fade-edge story-fade-edge--start" aria-hidden="true"></div>
+        <div class="story-fade-edge story-fade-edge--end" aria-hidden="true"></div>
       </div>
     </section>
 
