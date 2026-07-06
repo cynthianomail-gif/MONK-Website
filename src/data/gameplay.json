@@ -1,0 +1,34 @@
+[
+  {
+    "id": "battle",
+    "title": "戰鬥",
+    "tagline": "回合制對峙，招式見真章",
+    "points": ["三行內特色說明…", "…", "…"],
+    "loop": "/media/video/loop_battle.webm",
+    "poster": "/media/img/poster_battle.webp"
+  },
+  {
+    "id": "explore",
+    "title": "探索",
+    "tagline": "新梵市街景，步步為營",
+    "points": ["三行內特色說明…", "…", "…"],
+    "loop": "/media/video/loop_explore.webm",
+    "poster": "/media/img/poster_explore.webp"
+  },
+  {
+    "id": "minigame",
+    "title": "小遊戲",
+    "tagline": "地下遊藝場，各路絕活",
+    "points": ["三行內特色說明…", "…", "…"],
+    "loop": "/media/video/loop_minigame.webm",
+    "poster": "/media/img/poster_minigame.webp"
+  },
+  {
+    "id": "skill",
+    "title": "技能習得",
+    "tagline": "了塵為師，習得絕技",
+    "points": ["三行內特色說明…", "…", "…"],
+    "loop": "/media/video/loop_skill.webm",
+    "poster": "/media/img/poster_skill.webp"
+  }
+]

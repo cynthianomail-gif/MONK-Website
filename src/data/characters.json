@@ -1,0 +1,36 @@
+{
+  "main": [
+    {
+      "id": "wujie",
+      "name": "無戒",
+      "title": "破戒僧",
+      "quote": "南無……得罪了。",
+      "desc": ["三行內介紹…", "…", "…"],
+      "portrait": "/media/img/char_wujie.webp",
+      "revealed": true
+    },
+    {
+      "id": "liaochen",
+      "name": "了塵",
+      "title": "了塵",
+      "quote": "……",
+      "desc": ["三行內介紹…", "…", "…"],
+      "portrait": "/media/img/char_liaochen.webp",
+      "revealed": true
+    }
+  ],
+  "gods": [
+    { "id": "ares",  "name": "阿瑞斯", "chapter": 1,  "revealed": true,  "portrait": "/media/img/god_ares.webp" },
+    { "id": "god02", "name": "", "chapter": 2,  "revealed": false, "portrait": "" },
+    { "id": "god03", "name": "", "chapter": 3,  "revealed": false, "portrait": "" },
+    { "id": "god04", "name": "", "chapter": 4,  "revealed": false, "portrait": "" },
+    { "id": "god05", "name": "", "chapter": 5,  "revealed": false, "portrait": "" },
+    { "id": "god06", "name": "", "chapter": 6,  "revealed": false, "portrait": "" },
+    { "id": "god07", "name": "", "chapter": 7,  "revealed": false, "portrait": "" },
+    { "id": "god08", "name": "", "chapter": 8,  "revealed": false, "portrait": "" },
+    { "id": "god09", "name": "", "chapter": 9,  "revealed": false, "portrait": "" },
+    { "id": "god10", "name": "", "chapter": 10, "revealed": false, "portrait": "" },
+    { "id": "god11", "name": "", "chapter": 11, "revealed": false, "portrait": "" },
+    { "id": "god12", "name": "", "chapter": 12, "revealed": false, "portrait": "" }
+  ]
+}

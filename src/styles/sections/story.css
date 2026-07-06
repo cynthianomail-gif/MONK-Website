@@ -1,0 +1,25 @@
+/* story.css — 5.3 水墨絵巻（墨黑底，M3 才做橫向捲軸邏輯，此檔僅骨架樣式） */
+
+#story {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--ink-black);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  clip-path: polygon(0 6vw, 100% 0, 100% 100%, 0 94%);
+  margin-top: -6vw;
+  margin-bottom: -6vw;
+}
+
+#story .section-inner {
+  max-width: 960px;
+  text-align: center;
+}
+
+#story h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  color: var(--gold);
+}

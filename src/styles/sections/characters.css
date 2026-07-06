@@ -1,0 +1,59 @@
+/* characters.css — 5.4 角色堂（墨黑底） */
+
+#characters {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--ink-black);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem 2rem;
+  clip-path: polygon(0 6vw, 100% 0, 100% 94%, 0 100%);
+  margin-top: -6vw;
+  margin-bottom: -6vw;
+}
+
+#characters h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  color: var(--gold);
+}
+
+#characters .main-cards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#characters .god-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  max-width: 960px;
+  width: 100%;
+}
+
+#characters .god-slot {
+  aspect-ratio: 3/4;
+  background: var(--paper-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--ink-60);
+}
+
+@media (max-width: 768px) {
+  #characters .god-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #characters .god-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,32 @@
+/* hero.css — 5.2 PV 全幅（墨黑底） */
+
+#hero {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--ink-black);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem 6rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 94%);
+  margin-bottom: -6vw;
+}
+
+#hero .section-inner {
+  max-width: 960px;
+  text-align: center;
+}
+
+#hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--gold);
+}
+
+#hero .hero-cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}

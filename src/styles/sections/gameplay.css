@@ -1,0 +1,43 @@
+/* gameplay.css — 5.5 玩法四象（紙白反差底） */
+
+#gameplay {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem 2rem;
+  clip-path: polygon(0 6vw, 100% 0, 100% 100%, 0 94%);
+  margin-top: -6vw;
+  margin-bottom: -6vw;
+}
+
+#gameplay h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  color: var(--vermilion);
+}
+
+#gameplay .quad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
+  width: 100%;
+}
+
+#gameplay .quad-card {
+  background: var(--ink-black);
+  color: var(--paper);
+  padding: 2rem;
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  #gameplay .quad-grid {
+    grid-template-columns: 1fr;
+  }
+}

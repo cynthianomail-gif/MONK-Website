@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>和尚逆天</title>
+  <meta name="description" content="《和尚逆天》——破戒之僧，逆天而行。" />
+</head>
+<body>
+  <!-- Loader（overlay，不算 section，spec §5.1） -->
+  <div id="loader" role="dialog" aria-label="進站儀式">
+    <img class="loader-woodfish" src="/media/img/woodfish.svg" alt="" aria-hidden="true" />
+    <p class="loader-hint">叩木魚，開山門</p>
+    <button class="loader-skip" type="button">直接進入</button>
+  </div>
+
+  <main>
+    <!-- 1. Hero -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="section-inner">
+        <h1 id="hero-heading">和尚逆天</h1>
+        <p><!-- TODO M1: strings.json --> 破戒之僧，逆天而行——佔位文案，正式文案待 strings.json 接入</p>
+        <div class="hero-cta-row">
+          <a class="cut-btn" href="#" data-todo>▶ 觀看完整 PV</a>
+          <a class="cut-btn" href="#" data-todo>下載 Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Story -->
+    <section id="story" aria-labelledby="story-heading">
+      <div class="section-inner">
+        <h2 id="story-heading">水墨絵巻・世界觀</h2>
+        <p><!-- TODO M1: strings.json --> 新梵市、萬神殿集團、破戒僧的逆天之路——佔位文案</p>
+      </div>
+    </section>
+
+    <!-- 3. Characters -->
+    <section id="characters" aria-labelledby="characters-heading">
+      <h2 id="characters-heading">角色堂</h2>
+      <p><!-- TODO M1: strings.json --> 佔位文案：主要角色與十二神封印格</p>
+      <div class="main-cards" aria-hidden="true"></div>
+      <div class="god-grid" aria-hidden="true"></div>
+    </section>
+
+    <!-- 4. Gameplay -->
+    <section id="gameplay" aria-labelledby="gameplay-heading">
+      <h2 id="gameplay-heading">玩法四象</h2>
+      <p><!-- TODO M1: strings.json --> 佔位文案：戰鬥／探索／小遊戲／技能習得</p>
+      <div class="quad-grid" aria-hidden="true"></div>
+    </section>
+
+    <!-- 5. Parlor -->
+    <section id="parlor" aria-labelledby="parlor-heading">
+      <h2 id="parlor-heading">地下遊藝場</h2>
+      <p><!-- TODO M1: strings.json --> 佔位文案：街機廊與電子木魚彩蛋</p>
+      <div class="arcade-row" aria-hidden="true"></div>
+    </section>
+
+    <!-- 6. Gallery -->
+    <section id="gallery" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">圖庫與 Press Kit</h2>
+      <p><!-- TODO M1: strings.json --> 佔位文案：遊戲截圖、立繪與美術圖</p>
+      <div class="gallery-columns" aria-hidden="true"></div>
+      <div class="presskit-bar">
+        <span>Press Kit 下載（zip）</span>
+        <a class="cut-btn" href="/presskit/monk_presskit.zip" data-todo>下載</a>
+      </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <section id="footer" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" class="sr-only">頁尾</h2>
+      <img class="footer-logo" src="/media/img/woodfish.svg" alt="和尚逆天" />
+      <p><!-- TODO M1: strings.json --> 破戒之僧，逆天而行。</p>
+      <div class="footer-sns">
+        <a href="#" data-todo aria-label="X">X</a>
+        <a href="#" data-todo aria-label="YouTube">YouTube</a>
+      </div>
+      <p class="footer-credit"><!-- TODO M1: strings.json --> 以 AI 輔助製作 ／ © 2026 {團隊名，待確認}</p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

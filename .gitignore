@@ -1,0 +1,4 @@
+node_modules/
+dist/
+_art_src/
+.DS_Store

@@ -1,0 +1,12 @@
+:root {
+  --ink-black:  #14120f;   /* 主底：墨黑（帶暖） */
+  --paper:      #f2ead8;   /* 紙白：內文底、反白區 */
+  --gold:       #e8b84b;   /* 霓虹金：主強調（承遊戲 UI 金名牌） */
+  --gold-dim:   #9a7a2e;
+  --vermilion:  #c73e3a;   /* 朱紅：次強調（印章、警示、CTA hover） */
+  --neon-cyan:  #43d9d9;   /* 霓虹青：點綴限定（招牌、掃線），用量 <5% */
+  --ink-60: rgba(20,18,15,.6);
+  --paper-10: rgba(242,234,216,.1);
+  --skew: -6deg;            /* 全站統一斜切角 */
+  --ease-brush: cubic-bezier(.25,1,.35,1); /* 筆刷感 easing，全站動畫統一用 */
+}

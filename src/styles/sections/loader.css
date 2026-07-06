@@ -1,0 +1,49 @@
+/* loader.css — 進站儀式（overlay，不算 section）*/
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: var(--ink-black);
+}
+
+#loader .loader-woodfish {
+  width: 120px;
+  height: 120px;
+  filter: grayscale(1) brightness(0.6);
+  cursor: not-allowed;
+}
+
+#loader.ready .loader-woodfish {
+  filter: none;
+  cursor: pointer;
+}
+
+#loader .loader-hint {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+#loader .loader-skip {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--ink-60);
+  background: none;
+  border: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loader.skippable .loader-skip {
+  opacity: 1;
+  pointer-events: auto;
+}
