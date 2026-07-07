@@ -47,10 +47,14 @@ function triggerCard(card: HTMLElement) {
     { '--p': '0%' } as gsap.TweenVars,
     { '--p': '112%', duration: 0.9, ease: 'power4.out' } as gsap.TweenVars
   );
-  if (!played.has(card)) {
-    played.add(card);
-    audio.sfx('sfx_bell');
-  }
+  playCardChime(card);
+}
+
+/** 每卡一次的鐘聲，桌面/行動兩路徑共用（spec §5.3 的 SFX 不分裝置）。 */
+function playCardChime(card: HTMLElement) {
+  if (played.has(card)) return;
+  played.add(card);
+  audio.sfx('sfx_bell');
 }
 
 /** 文案卡文字內容：由 strings.json 的 storyCards 填入（沿用既有 <p> 節點，不動 HTML 結構）。 */
@@ -96,8 +100,18 @@ function initDesktopScroll(): void {
 
 /** 行動版／reduced-motion：不 pin，直向排列，文案卡依序 brushReveal（reduced-motion 直接顯示）。 */
 function initMobileFallback(): void {
+  const reduced = prefersReducedMotion();
   cards.forEach((card) => {
     brushReveal(card, { start: 'top 85%', duration: 0.9 });
+    // 鐘聲與桌面路徑對齊（review finding 1）。reduced-motion 不補：卡片開站即全顯，
+    // 沒有「進場」時點可掛，一次連響四聲反而擾人。
+    if (reduced) return;
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => playCardChime(card),
+    });
   });
 }
 
