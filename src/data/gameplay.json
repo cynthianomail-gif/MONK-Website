@@ -3,32 +3,48 @@
     "id": "battle",
     "title": "戰鬥",
     "tagline": "回合制對峙，招式見真章",
-    "points": ["三行內特色說明…", "…", "…"],
-    "loop": "/media/video/loop_battle.webm",
-    "poster": "/media/img/poster_battle.webp"
+    "points": [
+      "回合制策略對峙，招式相剋見真章",
+      "弱點屬性系統，看穿破綻一擊制勝",
+      "技能特效全面翻新，打擊感全面升級"
+    ],
+    "loop": "",
+    "poster": "/media/img/ph_battle.webp"
   },
   {
     "id": "explore",
     "title": "探索",
     "tagline": "新梵市街景，步步為營",
-    "points": ["三行內特色說明…", "…", "…"],
-    "loop": "/media/video/loop_explore.webm",
-    "poster": "/media/img/poster_explore.webp"
+    "points": [
+      "3D 神社街自由走動，四時段光影變化",
+      "路上遭遇戰即時觸發，閒晃／追擊皆有",
+      "地點互動點齊全，NPC 對話、支線齊發"
+    ],
+    "loop": "",
+    "poster": "/media/img/ph_explore.webp"
   },
   {
     "id": "minigame",
     "title": "小遊戲",
     "tagline": "地下遊藝場，各路絕活",
-    "points": ["三行內特色說明…", "…", "…"],
-    "loop": "/media/video/loop_minigame.webm",
-    "poster": "/media/img/poster_minigame.webp"
+    "points": [
+      "飛鏢／輪盤／保齡球／21點／打擊籠五款街機",
+      "各自獨立玩法與 UI，非陽春小遊戲",
+      "地下遊藝場氛圍全開，霓虹燈影伴賭局"
+    ],
+    "loop": "",
+    "poster": "/media/img/ph_minigame.webp"
   },
   {
     "id": "skill",
     "title": "技能習得",
     "tagline": "了塵為師，習得絕技",
-    "points": ["三行內特色說明…", "…", "…"],
-    "loop": "/media/video/loop_skill.webm",
-    "poster": "/media/img/poster_skill.webp"
+    "points": [
+      "了塵為師，幫人練功解鎖新招式",
+      "經書系統記錄習得進度，紅點提示待學",
+      "技能樹隨劇情推進逐步展開"
+    ],
+    "loop": "",
+    "poster": "/media/img/ph_skill.webp"
   }
 ]

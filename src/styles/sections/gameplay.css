@@ -21,6 +21,13 @@
   color: var(--vermilion);
 }
 
+#gameplay > p {
+  max-width: 640px;
+  text-align: center;
+  color: var(--ink-60);
+  margin-top: -1rem;
+}
+
 #gameplay .quad-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -29,11 +36,128 @@
   width: 100%;
 }
 
-#gameplay .quad-card {
-  background: var(--ink-black);
+/* ---- 玩法四象大卡 ---- */
+
+.quad-card {
+  position: relative;
+  min-height: 260px;
+  padding: 0;
+  border: none;
   color: var(--paper);
-  padding: 2rem;
-  min-height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  transition: filter 0.35s var(--ease-brush), grid-column 0.4s var(--ease-brush),
+    transform 0.2s var(--ease-brush);
+}
+
+.quad-card:hover,
+.quad-card:focus-visible {
+  transform: translateY(-2px);
+}
+
+/* hover 一卡，其餘降飽和（桌面） */
+.quad-card.is-dimmed {
+  filter: saturate(0.25) brightness(0.75);
+}
+
+.quad-card.is-active {
+  filter: saturate(1.15) brightness(1.05);
+}
+
+.quad-card-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.quad-card-poster,
+.quad-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quad-card-video {
+  opacity: 0; /* 無片時 poster 常駐；補片後 lazyVideo 觸發播放才淡入 */
+  transition: opacity 0.3s ease;
+}
+
+.quad-card-video.is-playing {
+  opacity: 1;
+}
+
+.quad-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 18, 15, 0.15) 0%, rgba(20, 18, 15, 0.82) 100%);
+  z-index: 1;
+}
+
+.quad-card-label {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.quad-card-title {
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+.quad-card-tagline {
+  font-size: 0.85rem;
+  color: var(--paper);
+  opacity: 0.85;
+}
+
+.quad-card-points {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.quad-card-points li {
+  list-style: none;
+  padding-left: 1.1em;
+  position: relative;
+}
+
+.quad-card-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* ---- 展開態：橫幅（flex-grow 動畫） ---- */
+
+#gameplay .quad-grid:has(.quad-card.is-expanded) {
+  display: flex;
+  flex-direction: column;
+}
+
+.quad-card.is-expanded {
+  min-height: 360px;
+  flex-grow: 1;
 }
 
 @media (max-width: 768px) {

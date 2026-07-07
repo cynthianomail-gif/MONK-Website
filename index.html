@@ -82,15 +82,17 @@
     <!-- 4. Gameplay -->
     <section id="gameplay" aria-labelledby="gameplay-heading">
       <h2 id="gameplay-heading">玩法四象</h2>
-      <p><!-- TODO M1: strings.json --> 佔位文案：戰鬥／探索／小遊戲／技能習得</p>
+      <p data-intro>戰鬥、探索、小遊戲、技能習得——四種玩法，一場修行</p>
       <div class="quad-grid" aria-hidden="true"></div>
     </section>
 
     <!-- 5. Parlor -->
     <section id="parlor" aria-labelledby="parlor-heading">
       <h2 id="parlor-heading">地下遊藝場</h2>
-      <p><!-- TODO M1: strings.json --> 佔位文案：街機廊與電子木魚彩蛋</p>
-      <div class="arcade-row" aria-hidden="true"></div>
+      <p data-intro>五台街機，賭上功德——外加一台不太一樣的木魚機</p>
+      <div class="arcade-wrap">
+        <div class="arcade-row" aria-hidden="true"></div>
+      </div>
     </section>
 
     <!-- 6. Gallery -->
@@ -121,6 +123,13 @@
   <div id="pv-lightbox" role="dialog" aria-modal="true" aria-label="完整 PV" hidden>
     <button class="pv-lightbox-close" type="button" aria-label="關閉">✕</button>
     <p class="pv-lightbox-placeholder" data-todo>PV 製作中</p>
+  </div>
+
+  <!-- 電子木魚彩蛋 overlay（§5.6／§6.4；parlor.ts 接線，DOM 由 parlor.ts 動態建立內容，
+       此處僅留容器與 aria 骨架，內容於 initWoodfishGame() 時填入） -->
+  <div id="woodfish-overlay" role="dialog" aria-modal="true" aria-label="功德無量" hidden>
+    <button class="woodfish-close" type="button" aria-label="關閉">✕</button>
+    <div class="woodfish-stage"></div>
   </div>
 
   <script type="module" src="/src/main.ts"></script>

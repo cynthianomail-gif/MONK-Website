@@ -11,12 +11,14 @@
 | 項目 | 狀態 | 產出路徑 | 下一步 |
 |---|---|---|---|
 | Codex 素材工單 | ✅ 已出單 | MONK/docs/superpowers/handoff/2026-07-06-website-art-handoff.md | 等使用者交 Codex；交回後入 _art_src/ 轉檔 |
-| M0 腳手架 | 🔄 施工中 | D:\monk\website\ | 派工 sonnet，完成後主對話驗 build+截圖 |
-| M1 全站系統 | ⬜ 未開工 | src/core/ | 等 M0 過 |
-| M2 Loader+Hero | ⬜ 未開工 | | 等 M1 過；素材未到用佔位 |
-| M3 Story 絵巻 | ⬜ 未開工 | | 絵巻長圖需使用者過目 |
-| M4 Characters | ⬜ 未開工 | | 立繪現成，轉 webp 即可 |
-| M5 Gameplay+Parlor | ⬜ 未開工 | | 需遊戲實錄 loop |
+| M0 腳手架 | ✅ 完成（主對話親驗：build 零錯、deps 恰 6 個、tokens 逐字符合、七區 snapshot 過） | D:\monk\website\（報告 _qc/m0_report.md） | — |
+| M1 全站系統 | ✅ 完成（commit 3f5a541；fresh review 通過 0 findings，_qc/m1_review.md） | src/core/*＋main.ts＋core.css | — |
+| M2 Loader+Hero | ✅ 結案（commit 374c19f）。⚠**親驗違例**：fresh review agent 07-07 凌晨被額度砍死零產出，改主對話親驗重點項（inkReveal GLSL 逐字比對✓、10s timeout/3s skip/aria-disabled✓、build✓）；額度充裕時可補嚴格 review | core/inkReveal.ts、sections/loader.ts、hero.ts（_qc/m2_report.md） | — |
+| M2.5 墨流體 Hero（07-07 追加） | ✅ 結案（commit d517e52；fresh review 通過 0 findings，_qc/m2_5_m3_review.md） | core/suminagashi.ts、hero.ts、hero.css | PV 成片後使用者選：PV 進 hero 或墨流保留 |
+| M3 Story 絵巻 | ✅ 結案（commit 46d5929；review 有條件通過，2 小 findings 已由主對話修正＝commit 4a79638 行動版補鐘聲＋53ba9a9 內 width 614→720） | sections/story.ts、story.css、strings.json、story_mid.webp | 正式長圖等 Codex 第三批＋使用者過目 |
+| （跨單決策 07-07）data JSON 讀取 | ✅ 拍板 | — | M1 的 loadJSON() fetch src/data/ 在 build 後會 404（M3 發現）；**M4 起統一改靜態 import**（tsconfig 已加 resolveJsonModule）；utils.loadJSON 留給 M6 清理 |
+| M4 Characters | ✅ 結案（commit 53ba9a9）。⚠**親驗違例**：施工 agent 07-07 上午被額度砍死（死前四檔已改完＋立繪已轉檔），主對話接手 read-back＋實測（渲染 2 卡 12 格✓、modal 鍵盤全流程含焦點還原✓、375px 三欄無溢出✓、console 零錯✓、_todo 文字外漏已修）；額度充裕時可補嚴格 review | sections/characters.ts、characters.css、characters.json | — |
+| M5 Gameplay+Parlor | ✅ 結案（主對話親做，全部驗收條件過，報告 _qc/m5_report.md） | sections/gameplay.ts、parlor.ts、styles/sections/{gameplay,parlor}.css、data/{gameplay,arcade,strings}.json、index.html gameplay/parlor 區＋#woodfish-overlay、9 張 ph_*.webp 佔位圖 | 影片 loop 缺（使用者指示跳過）；日後補 webm 只需填 JSON loop 欄位 |
 | M6 Gallery+Footer+收尾 | ⬜ 未開工 | | §9 硬指標全查 |
 | M7 部署 | ⬜ 未開工 | | Vercel |
 
@@ -24,7 +26,7 @@
 
 | 素材 | 管道 | 狀態 |
 |---|---|---|
-| 木魚圖/紙紋/墨暈邊 | Codex（第一批） | ⬜ 出單 |
+| 木魚圖/紙紋/墨暈邊 | Codex（第一批） | ✅ QC 全過已接上（woodfish.webp 58KB／paper_tile.webp 978B／ink_edge.webp 27KB 入庫備用） |
 | logo 水墨題字 | Codex（第二批，2-3 候選） | ⬜ 出單 |
 | key art 橫+直 | Codex（第二批，2-3 候選選基底） | ⬜ 出單 |
 | 絵巻三層長圖 | Codex（第三批，M3 前；出圖需過目） | ⬜ 出單 |
