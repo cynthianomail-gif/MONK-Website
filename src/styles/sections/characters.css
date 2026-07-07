@@ -9,11 +9,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   padding: 6rem 2rem;
   clip-path: polygon(0 6vw, 100% 0, 100% 94%, 0 100%);
   margin-top: -6vw;
   margin-bottom: -6vw;
+  overflow-x: clip; /* 立繪溢出卡框(P5手法)需要 section 層不裁到，但橫向仍不能破版 */
 }
 
 #characters h2 {
@@ -21,12 +22,206 @@
   color: var(--gold);
 }
 
+#characters > p {
+  max-width: 640px;
+  text-align: center;
+  color: var(--ink-60);
+  margin-top: -2rem;
+}
+
+/* ---- 上排：主角大卡 ---- */
+
 #characters .main-cards {
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 1.5rem; /* 立繪溢出卡框需要的呼吸空間 */
 }
+
+.char-card {
+  position: relative;
+  width: min(280px, 40vw);
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg, #1d1a15, var(--ink-black));
+  border: none;
+  color: inherit;
+  padding: 0;
+  overflow: visible; /* P5 手法：立繪溢出卡框 */
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s var(--ease-brush);
+  cursor: pointer;
+}
+
+.char-card:hover,
+.char-card:focus-visible {
+  box-shadow: 0 0 0 2px var(--gold), 0 12px 32px rgba(232, 184, 75, 0.35);
+}
+
+.char-card-portrait {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.char-card-portrait img {
+  width: 100%;
+  height: auto;
+  max-height: 128%;
+  object-fit: contain;
+  object-position: bottom;
+  transform: scale(1) translateY(0);
+  transition: transform 0.4s var(--ease-brush), filter 0.4s var(--ease-brush);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+}
+
+.char-card:hover .char-card-portrait img,
+.char-card:focus-visible .char-card-portrait img {
+  transform: scale(1.06) translateY(-10px);
+}
+
+.char-card-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(0deg, rgba(20, 18, 15, 0.92), transparent);
+  clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+  z-index: 1;
+}
+
+.char-card-name {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--gold);
+}
+
+.char-card-title {
+  font-size: 0.8rem;
+  color: var(--paper);
+  opacity: 0.8;
+}
+
+/* ---- 主角 modal（<dialog> 原生 focus trap） ---- */
+
+.char-modal {
+  border: none;
+  padding: 0;
+  max-width: min(960px, 92vw);
+  width: 100%;
+  max-height: 88vh;
+  background: var(--ink-black);
+  color: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+}
+
+.char-modal::backdrop {
+  background: rgba(10, 9, 7, 0.85);
+}
+
+.char-modal-portrait {
+  position: relative;
+  background: linear-gradient(160deg, #1d1a15, var(--ink-black));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.char-modal-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.char-modal-info {
+  position: relative;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow-y: auto;
+}
+
+.char-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 2px solid var(--gold-dim);
+  color: var(--gold);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-modal-close:hover {
+  border-color: var(--gold);
+  background: rgba(232, 184, 75, 0.1);
+}
+
+.char-modal-nameplate {
+  border-left: 4px solid var(--vermilion);
+  padding-left: 1rem;
+}
+
+.char-modal-nameplate h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--gold);
+}
+
+.char-modal-title {
+  font-size: 0.9rem;
+  color: var(--paper);
+  opacity: 0.75;
+}
+
+.char-modal-quote {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--gold-dim);
+  font-style: normal;
+}
+
+.char-modal-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 767px) {
+  .char-modal {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .char-modal-portrait {
+    min-height: 240px;
+  }
+}
+
+/* ---- 下排：十二神封印格 ---- */
 
 #characters .god-grid {
   display: grid;
@@ -37,12 +232,81 @@
 }
 
 #characters .god-slot {
+  position: relative;
   aspect-ratio: 3/4;
   background: var(--paper-10);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 0.4rem;
   font-size: 0.75rem;
+  color: var(--ink-60);
+  overflow: hidden;
+}
+
+.god-slot.revealed {
+  background: linear-gradient(160deg, #1d1a15, var(--ink-black));
+  cursor: default;
+}
+
+.god-slot.revealed img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s var(--ease-brush);
+}
+
+.god-slot.revealed:hover img,
+.god-slot.revealed:focus-within img {
+  transform: scale(1.08);
+}
+
+.god-slot-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.35rem 0.25rem;
+  text-align: center;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: var(--gold);
+  background: linear-gradient(0deg, rgba(20, 18, 15, 0.85), transparent);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-brush);
+}
+
+.god-slot.revealed:hover .god-slot-name,
+.god-slot.revealed:focus-within .god-slot-name {
+  opacity: 1;
+}
+
+.god-slot-silhouette {
+  width: 55%;
+  aspect-ratio: 1/1.6;
+  background: var(--ink-60);
+  clip-path: polygon(
+    50% 0%, 62% 8%, 66% 22%, 80% 30%, 82% 48%,
+    72% 55%, 78% 70%, 70% 100%, 30% 100%, 22% 70%,
+    28% 55%, 18% 48%, 20% 30%, 34% 22%, 38% 8%
+  );
+}
+
+.god-slot-mark {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.1em;
+}
+
+.god-slot-chapter {
+  font-size: 0.65rem;
   color: var(--ink-60);
 }
 
@@ -55,5 +319,8 @@
 @media (max-width: 480px) {
   #characters .god-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  #characters .main-cards {
+    gap: 1.5rem;
   }
 }

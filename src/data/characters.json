@@ -1,20 +1,27 @@
 {
+  "_todo": "主角 desc/quote 與十二神名單為佔位文案，待使用者定稿",
   "main": [
     {
       "id": "wujie",
       "name": "無戒",
       "title": "破戒僧",
       "quote": "南無……得罪了。",
-      "desc": ["三行內介紹…", "…", "…"],
+      "desc": [
+        "曾是新梵市數一數二的高僧，一夕破戒，從此以拳頭代替經文。",
+        "他不信因果，只信打倒眼前的神——即使那是萬神殿集團供奉的十二神。"
+      ],
       "portrait": "/media/img/char_wujie.webp",
       "revealed": true
     },
     {
       "id": "liaochen",
       "name": "了塵",
-      "title": "了塵",
-      "quote": "……",
-      "desc": ["三行內介紹…", "…", "…"],
+      "title": "師父",
+      "quote": "……施主，這條路你當真要走？",
+      "desc": [
+        "無戒的師父，一身戒律卻放任徒弟破戒下山。",
+        "深藏不露，是少數看穿萬神殿集團真面目的人。"
+      ],
       "portrait": "/media/img/char_liaochen.webp",
       "revealed": true
     }
