@@ -29,6 +29,9 @@
   gap: 0.75rem;
   width: 100%;
   overflow: hidden;
+  /* 左右邊緣淡出，滑動帶像從紙面兩側流過 */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
 #gallery .gallery-row {
@@ -82,13 +85,15 @@
   display: block;
   height: 100%;
   width: auto;
+  border: 1px solid rgb(20 18 15 / 0.16);
   box-shadow: 0 2px 10px rgb(0 0 0 / 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 @media (hover: hover) {
   #gallery .gallery-item:hover img {
     transform: scale(1.03);
+    border-color: var(--gold);
     box-shadow: 0 6px 18px rgb(0 0 0 / 0.35);
   }
 }
@@ -180,6 +185,11 @@
 
 #gallery-lightbox .gallery-lb-nav--prev { left: 1rem; }
 #gallery-lightbox .gallery-lb-nav--next { right: 1rem; }
+
+/* 單圖模式（神格 splash 等外部借用）：無前後可切，藏導航 */
+#gallery-lightbox.is-single .gallery-lb-nav {
+  display: none;
+}
 
 #gallery-lightbox .gallery-lb-bar {
   position: fixed;

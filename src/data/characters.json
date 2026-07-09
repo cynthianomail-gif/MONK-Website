@@ -30,18 +30,19 @@
       "revealed": true
     }
   ],
+  "_todo_gods": "六神已揭曉（splash 16:9，portraitW/H=1600/900）；章節分配為佔位（ares=1、zeus=12 主席收尾，其餘 2-5 順排），待劇情定稿再調",
   "gods": [
-    { "id": "ares",  "name": "阿瑞斯", "chapter": 1,  "revealed": true,  "portrait": "/media/img/god_ares.webp" },
-    { "id": "god02", "name": "", "chapter": 2,  "revealed": false, "portrait": "" },
-    { "id": "god03", "name": "", "chapter": 3,  "revealed": false, "portrait": "" },
-    { "id": "god04", "name": "", "chapter": 4,  "revealed": false, "portrait": "" },
-    { "id": "god05", "name": "", "chapter": 5,  "revealed": false, "portrait": "" },
+    { "id": "ares",     "name": "阿瑞斯", "domain": "戰爭",  "chapter": 1,  "revealed": true,  "portrait": "/media/img/gods/ares.avif",     "portraitW": 1600, "portraitH": 900 },
+    { "id": "apollo",   "name": "阿波羅", "domain": "太陽",  "chapter": 2,  "revealed": true,  "portrait": "/media/img/gods/apollo.avif",   "portraitW": 1600, "portraitH": 900 },
+    { "id": "athena",   "name": "雅典娜", "domain": "智慧",  "chapter": 3,  "revealed": true,  "portrait": "/media/img/gods/athena.avif",   "portraitW": 1600, "portraitH": 900 },
+    { "id": "hermes",   "name": "荷米斯", "domain": "傳訊",  "chapter": 4,  "revealed": true,  "portrait": "/media/img/gods/hermes.avif",   "portraitW": 1600, "portraitH": 900 },
+    { "id": "poseidon", "name": "波賽頓", "domain": "海洋",  "chapter": 5,  "revealed": true,  "portrait": "/media/img/gods/poseidon.avif", "portraitW": 1600, "portraitH": 900 },
     { "id": "god06", "name": "", "chapter": 6,  "revealed": false, "portrait": "" },
     { "id": "god07", "name": "", "chapter": 7,  "revealed": false, "portrait": "" },
     { "id": "god08", "name": "", "chapter": 8,  "revealed": false, "portrait": "" },
     { "id": "god09", "name": "", "chapter": 9,  "revealed": false, "portrait": "" },
     { "id": "god10", "name": "", "chapter": 10, "revealed": false, "portrait": "" },
     { "id": "god11", "name": "", "chapter": 11, "revealed": false, "portrait": "" },
-    { "id": "god12", "name": "", "chapter": 12, "revealed": false, "portrait": "" }
+    { "id": "zeus",     "name": "宙斯",   "domain": "雷霆",  "chapter": 12, "revealed": true,  "portrait": "/media/img/gods/zeus.avif",     "portraitW": 1600, "portraitH": 900 }
   ]
 }

@@ -6,6 +6,17 @@
 > 不進 tab 順序、reduced-motion 退靜態可橫捲）。實測：滑動推進（transform -931→-1740 跨呼叫
 > 遞增）、focus-within 暫停（lightbox 關閉焦點還原時自動觸發，行為正確）、19+19 格、console
 > 零錯、截圖過目。原第二節的瀑布流／press kit 記述視為歷史。
+>
+> **07-09 第二輪追記（使用者回饋：標題另取＋放十二神立繪＋整體設計感）**：
+> ①圖庫定名「繪馬堂」（EMA GALLERY，四候選使用者拍板）②十二神區改版＝六神 16:9 splash
+> 大卡（六尊有圖：ares/apollo/athena/hermes/poseidon/zeus，源檔 art_direction/.../gods/concepts
+> 1672×941 → 1600w AVIF ~280KB/張；名牌＝名＋司掌 chip；點卡開單圖 lightbox＝gallery.ts 匯出
+> openImageLightbox，is-single 藏導航）＋六格封印列照舊；**章節配置為佔位**（zeus=第12章主席
+> 收尾、其餘 2–5 順排，characters.json `_todo_gods` 已註記待劇情定稿調整）③全站區標題設計
+> 處理＝h2[data-en] 英文 overline（金）＋朱紅短刻線（base.css 通用，四區接上）④文案全面縮短
+> （四象/遊藝場/繪馬堂 intro）＋展示帶左右邊緣淡出 mask＋縮圖墨框 hover 金框。
+> 實測：6 神卡＋6 封印格渲染、單圖模式 → 鍵不切換、圖庫 19 張正常模式不受污染、焦點還原、
+> console/network 零錯；角色堂與繪馬堂截圖已給使用者過目。
 
 執行者：主對話親做（⚠親驗違例日：07-09 第二波 agent 額度死亡後，依 50-letter 踩坑守則本日不派 agent；
 施工＋驗收皆主對話完成，額度充裕時可補嚴格 fresh review）。

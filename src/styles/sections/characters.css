@@ -224,11 +224,91 @@
 /* ---- 下排：十二神封印格 ---- */
 
 #characters .god-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ---- 已揭曉：16:9 splash 大卡（07-09 改版） ---- */
+
+#characters .god-splash-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+#characters .god-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: var(--ink-black);
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+}
+
+#characters .god-card:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+#characters .god-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-brush);
+}
+
+#characters .god-card:hover img,
+#characters .god-card:focus-visible img {
+  transform: scale(1.05);
+}
+
+#characters .god-card-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(10 9 7 / 0.82) 0%, rgb(10 9 7 / 0.25) 32%, transparent 55%);
+  pointer-events: none;
+}
+
+#characters .god-card-plate {
+  position: absolute;
+  left: 1.1rem;
+  bottom: 0.9rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+#characters .god-card-name {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  color: var(--paper);
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.6);
+}
+
+#characters .god-card-domain {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  padding: 0.2rem 0.45rem 0.2rem 0.65rem;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+}
+
+/* ---- 未揭曉：封印小格列 ---- */
+
+#characters .god-sealed-row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 0.75rem;
-  max-width: 960px;
-  width: 100%;
 }
 
 #characters .god-slot {
@@ -312,16 +392,25 @@
 }
 
 @media (max-width: 768px) {
-  #characters .god-grid {
-    grid-template-columns: repeat(4, 1fr);
+  #characters .god-splash-grid {
+    grid-template-columns: 1fr;
+  }
+  #characters .god-sealed-row {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  #characters .god-grid {
+  #characters .god-sealed-row {
     grid-template-columns: repeat(3, 1fr);
   }
   #characters .main-cards {
     gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #characters .god-card img {
+    transition: none;
   }
 }

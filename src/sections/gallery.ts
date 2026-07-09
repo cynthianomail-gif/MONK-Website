@@ -116,6 +116,34 @@ function buildLightbox(): void {
   });
 }
 
+/** 單圖模式（外部區塊借用 lightbox，如角色堂神格 splash）：隱藏前後導航與計數。 */
+let singleMode = false;
+
+/**
+ * 開啟單張圖片檢視（供其他 section import）。
+ * 與圖庫共用同一個 <dialog>，但不掛前後切換。
+ */
+export function openImageLightbox(
+  image: { full: string; alt: string; w: number; h: number },
+  trigger: HTMLElement
+): void {
+  buildLightbox();
+  if (!lightbox || !lbImg || !lbCaption || !lbCounter) return;
+  singleMode = true;
+  lightbox.classList.add('is-single');
+  lastTrigger = trigger;
+  lbImg.src = image.full;
+  lbImg.alt = image.alt;
+  lbImg.width = image.w;
+  lbImg.height = image.h;
+  lbCaption.textContent = image.alt;
+  lbCounter.textContent = '';
+  lightbox.showModal();
+  lenis?.stop();
+  document.body.style.overflow = 'hidden';
+  lbCloseBtn?.focus();
+}
+
 /** 預載相鄰 1 張（spec §5.7 互動要點）。 */
 function preloadAdjacent(index: number): void {
   [index - 1, index + 1].forEach((i) => {
@@ -126,6 +154,7 @@ function preloadAdjacent(index: number): void {
 
 function show(index: number): void {
   if (!lbImg || !lbCaption || !lbCounter) return;
+  if (singleMode) return; // 單圖模式不切換
   currentIndex = (index + items.length) % items.length;
   const item = items[currentIndex];
   lbImg.src = item.full;
@@ -140,6 +169,8 @@ function show(index: number): void {
 function openLightbox(index: number, trigger: HTMLElement): void {
   buildLightbox();
   if (!lightbox) return;
+  singleMode = false;
+  lightbox.classList.remove('is-single');
   lastTrigger = trigger;
   show(index);
   lightbox.showModal();

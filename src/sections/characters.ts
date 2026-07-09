@@ -19,6 +19,7 @@ import { brushReveal } from '../core/reveal';
 import { audio } from '../core/audio';
 import { lenis } from '../core/scroll';
 import { prefersReducedMotion } from '../core/utils';
+import { openImageLightbox } from './gallery';
 import charactersData from '../data/characters.json';
 
 interface MainCharacter {
@@ -36,9 +37,12 @@ interface MainCharacter {
 interface GodSlot {
   id: string;
   name: string;
+  domain?: string;
   chapter: number;
   revealed: boolean;
   portrait: string;
+  portraitW?: number;
+  portraitH?: number;
 }
 
 interface CharactersData {
@@ -230,66 +234,119 @@ function renderMainCards(): void {
   });
 }
 
-// ---- 十二神封印格 ----
+// ---- 十二神（07-09 改版：已揭曉＝16:9 splash 大卡，點卡開單圖 lightbox；未揭曉＝封印小格） ----
+
+function buildGodCard(god: GodSlot): HTMLElement {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'god-card';
+  card.dataset.godId = god.id;
+
+  const img = document.createElement('img');
+  img.src = god.portrait;
+  img.alt = `${god.name}——${god.domain ?? ''}`;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  if (god.portraitW && god.portraitH) {
+    img.width = god.portraitW;
+    img.height = god.portraitH;
+  }
+  card.appendChild(img);
+
+  const scrim = document.createElement('div');
+  scrim.className = 'god-card-scrim';
+  scrim.setAttribute('aria-hidden', 'true');
+  card.appendChild(scrim);
+
+  const plate = document.createElement('div');
+  plate.className = 'god-card-plate';
+  const nameEl = document.createElement('span');
+  nameEl.className = 'god-card-name';
+  nameEl.textContent = god.name;
+  plate.appendChild(nameEl);
+  if (god.domain) {
+    const domainEl = document.createElement('span');
+    domainEl.className = 'god-card-domain';
+    domainEl.textContent = god.domain;
+    plate.appendChild(domainEl);
+  }
+  card.appendChild(plate);
+
+  card.addEventListener('click', () =>
+    openImageLightbox(
+      {
+        full: god.portrait,
+        alt: `${god.name}——${god.domain ?? ''}`,
+        w: god.portraitW ?? 1600,
+        h: god.portraitH ?? 900,
+      },
+      card
+    )
+  );
+
+  return card;
+}
+
+function buildSealedSlot(god: GodSlot): HTMLElement {
+  const slot = document.createElement('div');
+  slot.className = 'god-slot cut-panel';
+  slot.dataset.godId = god.id;
+
+  const silhouette = document.createElement('div');
+  silhouette.className = 'god-slot-silhouette';
+  silhouette.setAttribute('aria-hidden', 'true');
+  slot.appendChild(silhouette);
+
+  const mark = document.createElement('span');
+  mark.className = 'god-slot-mark';
+  mark.textContent = '???';
+  slot.appendChild(mark);
+
+  const chapterTag = document.createElement('span');
+  chapterTag.className = 'god-slot-chapter';
+  chapterTag.textContent = `第 ${god.chapter} 章`;
+  slot.appendChild(chapterTag);
+
+  slot.setAttribute('aria-label', `第${god.chapter}章：尚未揭曉`);
+
+  slot.addEventListener('pointerenter', () => {
+    if (!prefersReducedMotion()) {
+      gsap.to(slot, {
+        keyframes: [{ x: -3 }, { x: 3 }, { x: -2 }, { x: 0 }],
+        duration: 0.35,
+        ease: 'power1.inOut',
+      });
+    }
+    audio.sfx('sfx_woodfish', 0.6);
+  });
+
+  return slot;
+}
 
 function renderGodGrid(): void {
   if (!godGridEl) return;
   godGridEl.removeAttribute('aria-hidden');
   godGridEl.innerHTML = '';
 
+  const splashGrid = document.createElement('div');
+  splashGrid.className = 'god-splash-grid';
+  const sealedRow = document.createElement('div');
+  sealedRow.className = 'god-sealed-row';
+
   data.gods.forEach((god) => {
-    const slot = document.createElement('div');
-    slot.className = 'god-slot cut-panel';
-    slot.dataset.godId = god.id;
-    slot.classList.toggle('revealed', god.revealed);
-
     if (god.revealed) {
-      const img = document.createElement('img');
-      img.src = god.portrait;
-      img.alt = `${god.name}立繪`;
-      img.loading = 'lazy';
-      slot.appendChild(img);
-
-      const nameTag = document.createElement('span');
-      nameTag.className = 'god-slot-name';
-      nameTag.textContent = god.name;
-      slot.appendChild(nameTag);
-
-      slot.setAttribute('role', 'img');
-      slot.setAttribute('aria-label', `第${god.chapter}章：${god.name}`);
+      const card = buildGodCard(god);
+      splashGrid.appendChild(card);
+      brushReveal(card, { start: 'top 90%', duration: 0.7 });
     } else {
-      const silhouette = document.createElement('div');
-      silhouette.className = 'god-slot-silhouette';
-      silhouette.setAttribute('aria-hidden', 'true');
-      slot.appendChild(silhouette);
-
-      const mark = document.createElement('span');
-      mark.className = 'god-slot-mark';
-      mark.textContent = '???';
-      slot.appendChild(mark);
-
-      const chapterTag = document.createElement('span');
-      chapterTag.className = 'god-slot-chapter';
-      chapterTag.textContent = `第 ${god.chapter} 章`;
-      slot.appendChild(chapterTag);
-
-      slot.setAttribute('aria-label', `第${god.chapter}章：尚未揭曉`);
-
-      slot.addEventListener('pointerenter', () => {
-        if (!prefersReducedMotion()) {
-          gsap.to(slot, {
-            keyframes: [{ x: -3 }, { x: 3 }, { x: -2 }, { x: 0 }],
-            duration: 0.35,
-            ease: 'power1.inOut',
-          });
-        }
-        audio.sfx('sfx_woodfish', 0.6);
-      });
+      const slot = buildSealedSlot(god);
+      sealedRow.appendChild(slot);
+      brushReveal(slot, { start: 'top 92%', duration: 0.5 });
     }
-
-    godGridEl.appendChild(slot);
-    brushReveal(slot, { start: 'top 90%', duration: 0.6 });
   });
+
+  godGridEl.appendChild(splashGrid);
+  godGridEl.appendChild(sealedRow);
 }
 
 function init(): void {
