@@ -121,10 +121,16 @@
   max-height: 88vh;
   background: var(--ink-black);
   color: var(--paper);
-  display: grid;
+  /* 不能無條件寫 display——會蓋掉 UA 的 dialog:not([open]){display:none}，
+     close() 後永遠殘留在畫面上（07-09 使用者回報「關不掉」的根因） */
+  display: none;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+}
+
+.char-modal[open] {
+  display: grid;
 }
 
 .char-modal::backdrop {
@@ -237,6 +243,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+/* 十二神全揭曉後卡量大，寬螢幕排三欄壓縮縱深 */
+@media (min-width: 1200px) {
+  #characters .god-splash-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 #characters .god-card {

@@ -345,8 +345,9 @@ function renderGodGrid(): void {
     }
   });
 
-  godGridEl.appendChild(splashGrid);
-  godGridEl.appendChild(sealedRow);
+  // 空容器不上 DOM（十二神全揭曉時封印列為空；資料驅動，改 JSON 即自動出現）
+  if (splashGrid.childElementCount > 0) godGridEl.appendChild(splashGrid);
+  if (sealedRow.childElementCount > 0) godGridEl.appendChild(sealedRow);
 }
 
 function init(): void {

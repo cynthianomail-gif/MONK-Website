@@ -17,6 +17,18 @@
 > （四象/遊藝場/繪馬堂 intro）＋展示帶左右邊緣淡出 mask＋縮圖墨框 hover 金框。
 > 實測：6 神卡＋6 封印格渲染、單圖模式 → 鍵不切換、圖庫 19 張正常模式不受污染、焦點還原、
 > console/network 零錯；角色堂與繪馬堂截圖已給使用者過目。
+>
+> **07-10 第三輪追記（使用者回饋：十二神補齊＋主角加櫻＋modal 關不掉 bug）**：
+> ①**🐛 char modal 關不掉＝characters.css `.char-modal` 無條件 `display:grid` 蓋掉 UA 的
+> `dialog:not([open]){display:none}`**——close() 與 open 屬性都正常但畫面永遠殘留；M4 驗收
+> 只驗了屬性沒驗視覺（教訓：dialog 類驗收必須驗 computed display）。修＝拆 `[open]` 選擇器；
+> 順帶視覺驗證 gallery-lightbox／woodfish overlay 無同型問題。
+> ②十二神補齊＝上輪漏搜另外六尊（aphrodite/artemis/demeter/dionysus/hephaestus/hera 都在
+> concepts 目錄），全 12 尊 splash 上站、封印列淸空（程式保留資料驅動路徑，改 JSON 即回歸）、
+> 寬螢幕 3 欄；章節配置仍為佔位（2–11 順排）。
+> ③主角排加「櫻」＝正式水墨花魁 bust（assets/2d/portraits/cherry/bust/cherry_neutral.png →
+> char_cherry.webp 1170×1460；⚠ `_nobg/cherry_*.png` 是舊半寫實厚塗版，別用）；卡片文案
+> 從 cherry_first_meeting.dtl／quests.json 取材（櫻木会館、欠債主支線），desc 為佔位待定稿。
 
 執行者：主對話親做（⚠親驗違例日：07-09 第二波 agent 額度死亡後，依 50-letter 踩坑守則本日不派 agent；
 施工＋驗收皆主對話完成，額度充裕時可補嚴格 fresh review）。
