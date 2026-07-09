@@ -86,7 +86,8 @@ function renderGrid(): void {
     card.className = 'quad-card cut-panel';
     card.dataset.gameplayId = item.id;
     card.setAttribute('aria-expanded', 'false');
-    card.setAttribute('aria-label', `${item.title}——展開查看特色說明`);
+    // 無 aria-label：accessible name 取卡片可見文字（標題＋副標），
+    // 避免 axe label-content-name-mismatch；展開語意由 aria-expanded 傳達。
 
     const mediaWrap = document.createElement('div');
     mediaWrap.className = 'quad-card-media';

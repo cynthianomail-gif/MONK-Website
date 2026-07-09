@@ -1,8 +1,8 @@
 /* base.css — reset、字體、通用斜切、sr-only（spec §3.2） */
 
-@import '@fontsource/noto-serif-tc/900.css';
-@import '@fontsource/noto-sans-tc/400.css';
-@import '@fontsource/noto-sans-tc/500.css';
+/* 字體改由 main.ts 動態 import（M6 §9 效能收尾）：@fontsource 三個 weight 共 318 個
+   @font-face 子集宣告（gz 154KB），放這裡會整包進 render-blocking CSS，行動裝置
+   FCP/LCP 直接 +10s。font-display: swap 本來就先出系統字，async 載入不改變視覺流程。 */
 
 /* ---- reset ---- */
 *, *::before, *::after {

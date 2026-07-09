@@ -16,10 +16,66 @@
   text-align: center;
 }
 
+#footer .footer-woodfish-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#footer .footer-woodfish-btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
 #footer .footer-logo {
+  display: block;
   width: 64px;
   height: 64px;
   opacity: 0.9;
+}
+
+#footer .footer-woodfish-btn.is-knocked .footer-logo {
+  animation: footer-knock 0.3s ease-out;
+}
+
+@keyframes footer-knock {
+  30% { transform: scale(0.88); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #footer .footer-woodfish-btn.is-knocked .footer-logo {
+    animation: none;
+  }
+}
+
+#footer .footer-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2.5rem;
+  transform: translate(-50%, 12px);
+  background: var(--gold);
+  color: var(--ink-black);
+  padding: 0.6rem 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 50;
+}
+
+#footer .footer-toast.is-shown {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+#footer .footer-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 #footer .footer-sns {

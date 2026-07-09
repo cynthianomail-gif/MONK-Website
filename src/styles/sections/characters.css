@@ -307,7 +307,8 @@
 
 .god-slot-chapter {
   font-size: 0.65rem;
-  color: var(--ink-60);
+  /* 深色格底（#2a2823）上要用紙色系——var(--ink-60) 是墨色，對比僅 1.16:1（axe fail） */
+  color: rgba(242, 234, 216, 0.72);
 }
 
 @media (max-width: 768px) {

@@ -11,6 +11,8 @@
         "他不信因果，只信打倒眼前的神——即使那是萬神殿集團供奉的十二神。"
       ],
       "portrait": "/media/img/char_wujie.webp",
+      "portraitW": 850,
+      "portraitH": 884,
       "revealed": true
     },
     {
@@ -23,6 +25,8 @@
         "深藏不露，是少數看穿萬神殿集團真面目的人。"
       ],
       "portrait": "/media/img/char_liaochen.webp",
+      "portraitW": 1383,
+      "portraitH": 1504,
       "revealed": true
     }
   ],

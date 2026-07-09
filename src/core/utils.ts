@@ -43,10 +43,3 @@ export function lazyVideo(el: HTMLVideoElement): void {
   );
   io.observe(el);
 }
-
-/** fetch data/*.json 的統一入口。 */
-export async function loadJSON<T>(path: string): Promise<T> {
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`loadJSON failed: ${path} (${res.status})`);
-  return res.json() as Promise<T>;
-}

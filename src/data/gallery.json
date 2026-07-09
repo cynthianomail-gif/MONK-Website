@@ -1,4 +1,21 @@
 [
-  { "thumb": "/media/img/gallery_01_thumb.avif", "full": "/media/img/gallery_01.png", "alt": "遊戲截圖 01", "w": 1920, "h": 1080 },
-  { "thumb": "/media/img/gallery_02_thumb.avif", "full": "/media/img/gallery_02.png", "alt": "遊戲截圖 02", "w": 1920, "h": 1080 }
+  { "thumb": "/media/img/gallery/battle_thumb.avif", "full": "/media/img/gallery/battle.avif", "alt": "戰鬥畫面：無戒對峙萬神殿量產保全", "w": 1920, "h": 1080 },
+  { "thumb": "/media/img/gallery/wujie_thumb.avif", "full": "/media/img/gallery/wujie.avif", "alt": "無戒立繪——破戒僧", "w": 850, "h": 884 },
+  { "thumb": "/media/img/gallery/street_day_thumb.avif", "full": "/media/img/gallery/street_day.avif", "alt": "神社街・白晝街景", "w": 1920, "h": 1080 },
+  { "thumb": "/media/img/gallery/summon_thumb.avif", "full": "/media/img/gallery/summon.avif", "alt": "戰鬥演出：護法召喚", "w": 1920, "h": 1080 },
+  { "thumb": "/media/img/gallery/bowling_thumb.avif", "full": "/media/img/gallery/bowling.avif", "alt": "小遊戲：保齡球館", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/liaochen_thumb.avif", "full": "/media/img/gallery/liaochen.avif", "alt": "了塵立繪——無戒之師", "w": 1383, "h": 1504 },
+  { "thumb": "/media/img/gallery/street_dusk_thumb.avif", "full": "/media/img/gallery/street_dusk.avif", "alt": "神社街・黃昏", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/blackjack_thumb.avif", "full": "/media/img/gallery/blackjack.avif", "alt": "小遊戲：21 點賭桌", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/keyart_thumb.avif", "full": "/media/img/gallery/keyart.avif", "alt": "主視覺（暫代 key art）", "w": 1920, "h": 1072 },
+  { "thumb": "/media/img/gallery/guard_thumb.avif", "full": "/media/img/gallery/guard.avif", "alt": "戰鬥指令選單", "w": 1920, "h": 1080 },
+  { "thumb": "/media/img/gallery/shrine_thumb.avif", "full": "/media/img/gallery/shrine.avif", "alt": "神社本殿前", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/darts_thumb.avif", "full": "/media/img/gallery/darts.avif", "alt": "小遊戲：飛鏢", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/ares_thumb.avif", "full": "/media/img/gallery/ares.avif", "alt": "阿瑞斯立繪——萬神殿十二神・戰爭", "w": 768, "h": 1446 },
+  { "thumb": "/media/img/gallery/street_night_thumb.avif", "full": "/media/img/gallery/street_night.avif", "alt": "神社街・深夜燈籠", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/batting_thumb.avif", "full": "/media/img/gallery/batting.avif", "alt": "小遊戲：打擊場", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/dialogue_thumb.avif", "full": "/media/img/gallery/dialogue.avif", "alt": "對話場景：斗笠僧了塵", "w": 1920, "h": 1080 },
+  { "thumb": "/media/img/gallery/parlor_thumb.avif", "full": "/media/img/gallery/parlor.avif", "alt": "地下遊藝場・輪盤桌", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/offering_thumb.avif", "full": "/media/img/gallery/offering.avif", "alt": "小遊戲：接缽化緣・山門暮色", "w": 1280, "h": 720 },
+  { "thumb": "/media/img/gallery/armory_thumb.avif", "full": "/media/img/gallery/armory.avif", "alt": "軍火庫街區", "w": 1280, "h": 720 }
 ]

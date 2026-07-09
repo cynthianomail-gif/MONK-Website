@@ -158,6 +158,8 @@ function buildWoodfishCabinet(): HTMLElement {
   img.src = '/media/img/woodfish.webp';
   img.alt = '';
   img.loading = 'lazy';
+  img.width = 512;
+  img.height = 512;
   screen.appendChild(img);
 
   const caption = document.createElement('p');

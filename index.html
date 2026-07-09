@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>和尚逆天</title>
   <meta name="description" content="《和尚逆天》——破戒之僧，逆天而行。" />
+  <link rel="icon" href="/media/img/woodfish.svg" type="image/svg+xml" />
 </head>
 <body>
   <!-- Loader（overlay，不算 section，spec §5.1） -->
@@ -21,8 +22,10 @@
     <section id="hero" aria-labelledby="hero-heading">
       <div class="hero-bg" aria-hidden="true">
         <picture>
-          <source srcset="/media/img/poster.avif" type="image/avif" />
-          <img class="hero-poster" src="/media/img/poster.webp" alt="" width="1920" height="1072" fetchpriority="high" />
+          <source srcset="/media/img/poster_828.avif 828w, /media/img/poster.avif 1920w" sizes="100vw" type="image/avif" />
+          <img class="hero-poster" src="/media/img/poster.webp"
+               srcset="/media/img/poster_828.webp 828w, /media/img/poster.webp 1920w" sizes="100vw"
+               alt="" width="1920" height="1072" fetchpriority="high" />
         </picture>
         <video class="hero-video" muted autoplay loop playsinline preload="none"
                poster="/media/img/poster.webp" data-placeholder>
@@ -98,24 +101,26 @@
     <!-- 6. Gallery -->
     <section id="gallery" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading">圖庫與 Press Kit</h2>
-      <p><!-- TODO M1: strings.json --> 佔位文案：遊戲截圖、立繪與美術圖</p>
+      <p data-intro>遊戲截圖、角色立繪與美術素材</p>
       <div class="gallery-columns" aria-hidden="true"></div>
       <div class="presskit-bar">
         <span>Press Kit 下載（zip）</span>
-        <a class="cut-btn" href="/presskit/monk_presskit.zip" data-todo>下載</a>
+        <a class="cut-btn" href="/presskit/monk_presskit.zip" download>下載</a>
       </div>
     </section>
 
     <!-- 7. Footer -->
     <section id="footer" aria-labelledby="footer-heading">
       <h2 id="footer-heading" class="sr-only">頁尾</h2>
-      <img class="footer-logo" src="/media/img/woodfish.svg" alt="和尚逆天" />
-      <p><!-- TODO M1: strings.json --> 破戒之僧，逆天而行。</p>
+      <button class="footer-woodfish-btn" type="button" aria-label="敲一下木魚">
+        <img class="footer-logo" src="/media/img/woodfish.webp" alt="" width="512" height="512" loading="lazy" />
+      </button>
+      <p data-tagline>破戒之僧，逆天而行。</p>
       <div class="footer-sns">
         <a href="#" data-todo aria-label="X">X</a>
         <a href="#" data-todo aria-label="YouTube">YouTube</a>
       </div>
-      <p class="footer-credit"><!-- TODO M1: strings.json --> 以 AI 輔助製作 ／ © 2026 {團隊名，待確認}</p>
+      <p class="footer-credit"></p>
     </section>
   </main>
 

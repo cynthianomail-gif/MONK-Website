@@ -21,8 +21,15 @@
   "woodfishUnlockBody": "108 記木魚，功德圓滿——結緣桌布已解鎖",
   "woodfishDownloadLabel": "下載結緣桌布",
   "_todo_wallpaper": "wallpaper_phone.png 為 Codex 第二批素材，尚未交回，下載連結先掛著",
+  "galleryIntro": "遊戲截圖、角色立繪與美術素材——媒體取用請下載 Press Kit",
+  "galleryLightboxLabel": "圖庫檢視",
+  "pressKitLabel": "Press Kit 下載（zip）",
+  "footerTagline": "破戒之僧，逆天而行。",
+  "footerToast": "功德圓滿",
+  "footerWoodfishLabel": "敲一下木魚",
   "footerCredit": [
-    "以 AI 輔助製作",
+    "以 AI 輔助製作：程式 Claude Code・Codex／美術生成 Higgsfield・Magnific／3D Meshy／動態 Kling",
     "© 2026 {團隊名，待確認}"
-  ]
+  ],
+  "_todo_footer": "footerCredit 工具名列點與團隊名待使用者定稿"
 }

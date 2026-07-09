@@ -28,6 +28,8 @@ interface MainCharacter {
   quote: string;
   desc: string[];
   portrait: string;
+  portraitW?: number;
+  portraitH?: number;
   revealed: boolean;
 }
 
@@ -188,7 +190,8 @@ function renderMainCards(): void {
     card.type = 'button';
     card.className = 'char-card cut-panel';
     card.dataset.charId = char.id;
-    card.setAttribute('aria-label', `查看${char.name}的詳細介紹`);
+    // 無 aria-label：accessible name 直接取卡片可見文字（名＋稱號），
+    // 避免 axe label-content-name-mismatch（可見文字必須包含於 accessible name）。
 
     const portraitWrap = document.createElement('div');
     portraitWrap.className = 'char-card-portrait';
@@ -196,6 +199,10 @@ function renderMainCards(): void {
     img.src = char.portrait;
     img.alt = `${char.name}立繪`;
     img.loading = 'lazy';
+    if (char.portraitW && char.portraitH) {
+      img.width = char.portraitW;
+      img.height = char.portraitH;
+    }
     portraitWrap.appendChild(img);
 
     const label = document.createElement('div');

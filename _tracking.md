@@ -18,8 +18,8 @@
 | M3 Story 絵巻 | ✅ 結案（commit 46d5929；review 有條件通過，2 小 findings 已由主對話修正＝commit 4a79638 行動版補鐘聲＋53ba9a9 內 width 614→720） | sections/story.ts、story.css、strings.json、story_mid.webp | 正式長圖等 Codex 第三批＋使用者過目 |
 | （跨單決策 07-07）data JSON 讀取 | ✅ 拍板 | — | M1 的 loadJSON() fetch src/data/ 在 build 後會 404（M3 發現）；**M4 起統一改靜態 import**（tsconfig 已加 resolveJsonModule）；utils.loadJSON 留給 M6 清理 |
 | M4 Characters | ✅ 結案（commit 53ba9a9）。⚠**親驗違例**：施工 agent 07-07 上午被額度砍死（死前四檔已改完＋立繪已轉檔），主對話接手 read-back＋實測（渲染 2 卡 12 格✓、modal 鍵盤全流程含焦點還原✓、375px 三欄無溢出✓、console 零錯✓、_todo 文字外漏已修）；額度充裕時可補嚴格 review | sections/characters.ts、characters.css、characters.json | — |
-| M5 Gameplay+Parlor | ✅ 結案（主對話親做，全部驗收條件過，報告 _qc/m5_report.md） | sections/gameplay.ts、parlor.ts、styles/sections/{gameplay,parlor}.css、data/{gameplay,arcade,strings}.json、index.html gameplay/parlor 區＋#woodfish-overlay、9 張 ph_*.webp 佔位圖 | 影片 loop 缺（使用者指示跳過）；日後補 webm 只需填 JSON loop 欄位 |
-| M6 Gallery+Footer+收尾 | ⬜ 未開工 | | §9 硬指標全查 |
+| M5 Gameplay+Parlor | ✅ 結案（施工 agent 完成＋07-09 主對話抽驗過：展開/木魚 merit 持久化/Esc 焦點還原/console 零錯，報告 _qc/m5_report.md） | sections/gameplay.ts、parlor.ts、styles/sections/{gameplay,parlor}.css、data/{gameplay,arcade,strings}.json、index.html gameplay/parlor 區＋#woodfish-overlay、9 張 ph_*.webp 佔位圖 | 影片 loop 缺（使用者指示跳過）；日後補 webm 只需填 JSON loop 欄位 |
+| M6 Gallery+Footer+收尾 | ✅ 結案（07-09 主對話親做＋親驗。⚠**親驗違例日**：第二波 agent 額度死亡後本日不派 agent，額度充裕時可補嚴格 fresh review。報告 _qc/m6_report.md）。§9：JS 70KB gz✓／阻塞 CSS 6.3KB gz✓／**a11y 100・BP 100**／CLS 0.001✓／zip 20.1MB✓；**Perf 79 未達 85**——根因＝hero h1 文字佔位 logo 的字體 swap LCP，Codex logo 圖到位換 `<img>` 後自然消失，屆時重跑；reduced-motion 全頁 DevTools 模擬未能在 preview 工具做，留實機補驗 | sections/gallery.ts、footer.ts、styles/sections/{gallery,footer}.css、data/{gallery,strings,characters}.json、public/media/img/gallery/×38、poster_828.*、public/presskit/monk_presskit.zip（20.1MB）、vite-env.d.ts；附帶：字體改非同步載入（main.ts/base.css）、axe 三類修正（characters/gameplay/parlor/characters.css）、favicon、utils.loadJSON 清理 | 等 Codex logo→hero 換圖→重跑 Lighthouse |
 | M7 部署 | ⬜ 未開工 | | Vercel |
 
 ## 素材狀態（詳見 handoff 單）
