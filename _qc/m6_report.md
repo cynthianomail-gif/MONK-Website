@@ -1,5 +1,12 @@
 # M6 Gallery + Footer + 收尾 施工報告（2026-07-09）
 
+> **07-09 改版追記（使用者回饋）**：圖庫拿掉下載類 UI（press kit 條移除、zip 自 repo 刪除，
+> staging 檔留在 session scratchpad 可隨時重打包）；瀑布流改**兩排反向自動滑動展示帶**
+> （CSS marquee 雙份內容無縫循環、hover/鍵盤聚焦暫停、點圖照開 lightbox、複製份 aria-hidden
+> 不進 tab 順序、reduced-motion 退靜態可橫捲）。實測：滑動推進（transform -931→-1740 跨呼叫
+> 遞增）、focus-within 暫停（lightbox 關閉焦點還原時自動觸發，行為正確）、19+19 格、console
+> 零錯、截圖過目。原第二節的瀑布流／press kit 記述視為歷史。
+
 執行者：主對話親做（⚠親驗違例日：07-09 第二波 agent 額度死亡後，依 50-letter 踩坑守則本日不派 agent；
 施工＋驗收皆主對話完成，額度充裕時可補嚴格 fresh review）。
 

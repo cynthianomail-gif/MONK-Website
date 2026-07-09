@@ -1,12 +1,10 @@
-// gallery.ts — §5.7 Gallery + Press Kit
+// gallery.ts — §5.7 Gallery（07-09 使用者改版：拿掉 Press Kit 下載，改左右自動滑動展示帶）
 //
-// CSS columns 瀑布流（gallery.json 驅動，19 筆：截圖/立繪/美術圖）；縮圖 <button> 承載
-// （原生鍵盤可達），loading="lazy"＋width/height 防 CLS；進場 brushReveal 交錯。
-// 點圖 → 自製 lightbox（<dialog> 原生 focus trap／Esc）：滿版、←/→ 鍵與觸控滑動切換、
-// 預載相鄰 1 張；開啟 lenis.stop()、關閉還原捲動與焦點（同 characters.ts modal 慣例）。
-//
-// spec 註「lightbox 與 5.2 共用同一組件」：#pv-lightbox 目前是 PV 佔位骨架（PV 未成片），
-// 本檔 lightbox 為圖庫版實作；PV 成片接入時再抽共用（屆時只動 hero.ts 掛接點）。
+// 兩排水平 marquee（gallery.json 驅動，19 筆拆前後兩排）：CSS 無限循環捲動、
+// 排間反向、hover／鍵盤聚焦即暫停（可細看、可點）；每排內容雙份拼接做無縫循環，
+// 複製份為純裝飾（div＋aria-hidden，不進 tab 順序）。點圖 → lightbox（滿版、
+// ←/→ 鍵與指標滑動切換、Esc 關、預載相鄰 1 張、關閉還原 lenis/捲動/焦點）。
+// prefers-reduced-motion：不自動捲，退成靜態 overflow-x 可捲列（CSS @media 處理）。
 //
 // 資料：gallery.json 靜態 import（跨單決策 07-07：JSON 一律靜態 import）。
 // 加一張圖只改 JSON＋丟檔進 public/media/img/gallery/，不改本檔。
@@ -27,7 +25,7 @@ interface GalleryItem {
 const items = galleryData as GalleryItem[];
 
 const section = document.getElementById('gallery');
-const columnsEl = section?.querySelector<HTMLElement>('.gallery-columns') ?? null;
+const marqueeEl = section?.querySelector<HTMLElement>('.gallery-marquee') ?? null;
 
 // ---- Lightbox（<dialog>） ----
 
@@ -158,49 +156,76 @@ function closeLightbox(): void {
   (lastTrigger ?? document.body).focus();
 }
 
-// ---- 瀑布流 ----
+// ---- 展示帶（兩排反向 marquee） ----
 
-function renderColumns(): void {
-  if (!columnsEl) return;
-  columnsEl.removeAttribute('aria-hidden');
-  columnsEl.innerHTML = '';
+/** 建一個展示格：primary＝可點 <button>；複製份＝裝飾 <div>（aria-hidden）。 */
+function buildCell(item: GalleryItem, index: number, decorative: boolean): HTMLElement {
+  const cell = decorative ? document.createElement('div') : document.createElement('button');
+  cell.className = 'gallery-item';
+  if (decorative) {
+    cell.setAttribute('aria-hidden', 'true');
+  } else {
+    (cell as HTMLButtonElement).type = 'button';
+    cell.setAttribute('aria-label', `放大檢視：${item.alt}`);
+    cell.addEventListener('click', () => openLightbox(index, cell));
+  }
 
-  items.forEach((item, i) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'gallery-item';
-    btn.setAttribute('aria-label', `放大檢視：${item.alt}`);
+  const img = document.createElement('img');
+  img.src = item.thumb;
+  img.alt = decorative ? '' : item.alt;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.width = item.w;
+  img.height = item.h;
+  cell.appendChild(img);
+  return cell;
+}
 
-    const img = document.createElement('img');
-    img.src = item.thumb;
-    img.alt = item.alt;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.width = item.w;
-    img.height = item.h;
-    btn.appendChild(img);
+function buildRow(rowItems: { item: GalleryItem; index: number }[], reverse: boolean): HTMLElement {
+  const row = document.createElement('div');
+  row.className = `gallery-row${reverse ? ' gallery-row--reverse' : ''}`;
 
-    btn.addEventListener('click', () => openLightbox(i, btn));
+  const track = document.createElement('div');
+  track.className = 'gallery-track';
+  // 循環週期依內容量走，兩排速度略差避免同步呆版
+  track.style.setProperty('--marquee-dur', `${rowItems.length * (reverse ? 6.5 : 5.5)}s`);
 
-    columnsEl.appendChild(btn);
-    brushReveal(btn, { start: 'top 92%', duration: 0.7 });
-  });
+  // 雙份內容做無縫循環：第一份可互動，第二份純裝飾
+  for (const decorative of [false, true]) {
+    const set = document.createElement('div');
+    set.className = 'gallery-set';
+    if (decorative) set.setAttribute('aria-hidden', 'true');
+    rowItems.forEach(({ item, index }) => set.appendChild(buildCell(item, index, decorative)));
+    track.appendChild(set);
+  }
+
+  row.appendChild(track);
+  return row;
+}
+
+function renderMarquee(): void {
+  if (!marqueeEl) return;
+  marqueeEl.removeAttribute('aria-hidden');
+  marqueeEl.innerHTML = '';
+
+  const indexed = items.map((item, index) => ({ item, index }));
+  const half = Math.ceil(indexed.length / 2);
+  marqueeEl.appendChild(buildRow(indexed.slice(0, half), false));
+  marqueeEl.appendChild(buildRow(indexed.slice(half), true));
+
+  brushReveal(marqueeEl, { start: 'top 88%' });
 }
 
 function updateIntro(): void {
   const introEl = section?.querySelector<HTMLElement>('p[data-intro]');
   const intro = (strings as Record<string, unknown>).galleryIntro as string | undefined;
   if (introEl && intro) introEl.textContent = intro;
-
-  const pressKitLabel = (strings as Record<string, unknown>).pressKitLabel as string | undefined;
-  const pressKitSpan = section?.querySelector<HTMLElement>('.presskit-bar span');
-  if (pressKitSpan && pressKitLabel) pressKitSpan.textContent = pressKitLabel;
 }
 
 function init(): void {
   if (!section) return;
   updateIntro();
-  renderColumns();
+  renderMarquee();
 }
 
 init();

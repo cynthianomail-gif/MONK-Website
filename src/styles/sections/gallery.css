@@ -21,18 +21,52 @@
   color: var(--vermilion);
 }
 
-#gallery .gallery-columns {
-  columns: 4 200px;
+/* ---- 展示帶（兩排反向自動滑動；07-09 改版，取代瀑布流＋press kit） ---- */
+
+#gallery .gallery-marquee {
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
-  max-width: 1200px;
   width: 100%;
+  overflow: hidden;
+}
+
+#gallery .gallery-row {
+  overflow: hidden;
+}
+
+#gallery .gallery-track {
+  display: flex;
+  width: max-content;
+  animation: gallery-scroll var(--marquee-dur, 90s) linear infinite;
+  will-change: transform;
+}
+
+#gallery .gallery-row--reverse .gallery-track {
+  animation-direction: reverse;
+}
+
+/* hover 或鍵盤聚焦到排內任一格 → 暫停，可細看可點 */
+#gallery .gallery-row:hover .gallery-track,
+#gallery .gallery-row:focus-within .gallery-track {
+  animation-play-state: paused;
+}
+
+@keyframes gallery-scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* 每份內容自帶尾端間距，雙份拼接時 -50% 剛好一份寬＝無縫循環 */
+#gallery .gallery-set {
+  display: flex;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 #gallery .gallery-item {
   display: block;
-  width: 100%;
-  margin-bottom: 0.75rem;
-  break-inside: avoid;
+  flex: none;
+  height: 200px;
   padding: 0;
   border: 0;
   background: none;
@@ -46,20 +80,35 @@
 
 #gallery .gallery-item img {
   display: block;
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
   box-shadow: 0 2px 10px rgb(0 0 0 / 0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 @media (hover: hover) {
   #gallery .gallery-item:hover img {
-    transform: scale(1.02);
+    transform: scale(1.03);
     box-shadow: 0 6px 18px rgb(0 0 0 / 0.35);
   }
 }
 
+@media (max-width: 767px) {
+  #gallery .gallery-item {
+    height: 140px;
+  }
+}
+
+/* reduced-motion：不自動捲，退成靜態可手動橫捲的列 */
 @media (prefers-reduced-motion: reduce) {
+  #gallery .gallery-track {
+    animation: none;
+  }
+
+  #gallery .gallery-row {
+    overflow-x: auto;
+  }
+
   #gallery .gallery-item img {
     transition: none;
   }
@@ -168,15 +217,3 @@
   }
 }
 
-#gallery .presskit-bar {
-  background: var(--ink-black);
-  color: var(--gold);
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  max-width: 1200px;
-  flex-wrap: wrap;
-}
