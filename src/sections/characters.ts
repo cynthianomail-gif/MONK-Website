@@ -38,6 +38,7 @@ interface GodSlot {
   id: string;
   name: string;
   domain?: string;
+  business?: string;
   chapter: number;
   revealed: boolean;
   portrait: string;
@@ -269,6 +270,12 @@ function buildGodCard(god: GodSlot): HTMLElement {
     domainEl.className = 'god-card-domain';
     domainEl.textContent = god.domain;
     plate.appendChild(domainEl);
+  }
+  if (god.business) {
+    const businessEl = document.createElement('span');
+    businessEl.className = 'god-card-business';
+    businessEl.textContent = god.business;
+    plate.appendChild(businessEl);
   }
   card.appendChild(plate);
 

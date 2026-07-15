@@ -1,6 +1,7 @@
 /* story.css — 5.3 水墨絵巻（橫向捲軸，技術重點區）
-   佔位素材：遠景=CSS 漸層（墨黑→暗藍灰）；中景=戰鬥背景 hstack 拼接長圖 story_mid.webp（4000x1080）；
-   前景=文案卡＋無戒去背立繪 story_fg_wujie.webp 點綴。日後正式絵巻長圖到位只換 img src。 */
+   素材：遠景=CSS 漸層（被中景蓋住，僅 fallback）；中景=白晝神社街水墨絵巻 story_mid.webp（2474x1080，
+   2026-07-15 亮調版換裝，舊暗版存 _art_src/story_placeholder/story_mid_old_dark.webp）；
+   前景=文案卡＋無戒去背立繪 story_fg_wujie.webp 點綴。 */
 
 #story {
   position: relative;
@@ -79,7 +80,6 @@
   background-repeat: repeat-x;
   background-size: auto 100%;
   background-position: left center;
-  opacity: 0.92;
 }
 
 /* 前景：文案卡＋人物立繪點綴所在層 */

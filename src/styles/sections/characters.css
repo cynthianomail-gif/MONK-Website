@@ -293,10 +293,12 @@
 #characters .god-card-plate {
   position: absolute;
   left: 1.1rem;
+  right: 1.1rem;
   bottom: 0.9rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.6rem;
+  gap: 0.3rem 0.6rem;
 }
 
 #characters .god-card-name {
@@ -314,6 +316,15 @@
   padding: 0.2rem 0.45rem 0.2rem 0.65rem;
   color: var(--gold);
   border: 1px solid var(--gold-dim);
+}
+
+/* 企業命脈（萬神殿集團事業部門）——名字＋因緣章下方獨立一行 */
+#characters .god-card-business {
+  flex-basis: 100%;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgb(242 234 216 / 0.82);
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.7);
 }
 
 /* ---- 未揭曉：封印小格列 ---- */
