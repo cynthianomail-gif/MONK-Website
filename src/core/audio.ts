@@ -11,7 +11,7 @@ type SfxName = (typeof SFX_NAMES)[number];
 class AudioManager {
   private ctx?: AudioContext;
   private buffers = new Map<string, AudioBuffer>();
-  private bgm = new Audio('/media/audio/bgm.mp3');
+  private bgm = new Audio('media/audio/bgm.mp3');
   private warned = new Set<string>();
   muted = localStorage.getItem('monk-muted') === '1';
 
@@ -27,7 +27,7 @@ class AudioManager {
     await Promise.all(
       SFX_NAMES.map(async (n) => {
         try {
-          const res = await fetch(`/media/audio/${n}.mp3`);
+          const res = await fetch(`media/audio/${n}.mp3`);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const ab = await res.arrayBuffer();
           const decoded = await this.ctx!.decodeAudioData(ab);

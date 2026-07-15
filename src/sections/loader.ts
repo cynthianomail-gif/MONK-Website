@@ -64,7 +64,7 @@ function initLoader() {
   // 資產 preload：字體＋Hero poster（10s timeout 強制放行，Slow 3G 不卡死）
   const preload = Promise.all([
     document.fonts.ready.then(() => undefined),
-    preloadImage('/media/img/poster.avif'),
+    preloadImage('media/img/poster.avif'),
   ]);
   const timeout = new Promise<void>((resolve) => setTimeout(resolve, 10_000));
   Promise.race([preload.then(() => undefined), timeout]).then(setReady);

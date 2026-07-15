@@ -3,35 +3,35 @@
     "id": "dart",
     "title": "飛鏢",
     "tagline": "人中之龍式擲鏢",
-    "poster": "/media/img/ph_arcade_dart.webp",
+    "poster": "media/img/ph_arcade_dart.webp",
     "loop": ""
   },
   {
     "id": "roulette",
     "title": "輪盤",
     "tagline": "點格下注，一翻兩瞪眼",
-    "poster": "/media/img/ph_arcade_roulette.webp",
+    "poster": "media/img/ph_arcade_roulette.webp",
     "loop": ""
   },
   {
     "id": "bowling",
     "title": "保齡球",
     "tagline": "Wii 式揮桿手感",
-    "poster": "/media/img/ph_arcade_bowling.webp",
+    "poster": "media/img/ph_arcade_bowling.webp",
     "loop": ""
   },
   {
     "id": "blackjack",
     "title": "21點",
     "tagline": "Yakuza 式賭場全套 UI",
-    "poster": "/media/img/ph_arcade_blackjack.webp",
+    "poster": "media/img/ph_arcade_blackjack.webp",
     "loop": ""
   },
   {
     "id": "cage",
     "title": "打擊籠",
     "tagline": "揮棒定勝負",
-    "poster": "/media/img/ph_arcade_cage.webp",
+    "poster": "media/img/ph_arcade_cage.webp",
     "loop": ""
   }
 ]

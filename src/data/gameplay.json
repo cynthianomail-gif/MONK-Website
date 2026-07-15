@@ -9,7 +9,7 @@
       "技能特效全面翻新，打擊感全面升級"
     ],
     "loop": "",
-    "poster": "/media/img/ph_battle.webp"
+    "poster": "media/img/ph_battle.webp"
   },
   {
     "id": "explore",
@@ -21,7 +21,7 @@
       "地點互動點齊全，NPC 對話、支線齊發"
     ],
     "loop": "",
-    "poster": "/media/img/ph_explore.webp"
+    "poster": "media/img/ph_explore.webp"
   },
   {
     "id": "minigame",
@@ -33,7 +33,7 @@
       "地下遊藝場氛圍全開，霓虹燈影伴賭局"
     ],
     "loop": "",
-    "poster": "/media/img/ph_minigame.webp"
+    "poster": "media/img/ph_minigame.webp"
   },
   {
     "id": "skill",
@@ -45,6 +45,6 @@
       "技能樹隨劇情推進逐步展開"
     ],
     "loop": "",
-    "poster": "/media/img/ph_skill.webp"
+    "poster": "media/img/ph_skill.webp"
   }
 ]

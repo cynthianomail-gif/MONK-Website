@@ -10,7 +10,7 @@
         "曾是新梵市數一數二的高僧，一夕破戒，從此以拳頭代替經文。",
         "他不信因果，只信打倒眼前的神——即使那是萬神殿集團供奉的十二神。"
       ],
-      "portrait": "/media/img/char_wujie.webp",
+      "portrait": "media/img/char_wujie.webp",
       "portraitW": 850,
       "portraitH": 884,
       "revealed": true
@@ -24,7 +24,7 @@
         "無戒的師父，一身戒律卻放任徒弟破戒下山。",
         "深藏不露，是少數看穿萬神殿集團真面目的人。"
       ],
-      "portrait": "/media/img/char_liaochen.webp",
+      "portrait": "media/img/char_liaochen.webp",
       "portraitW": 1383,
       "portraitH": 1504,
       "revealed": true
@@ -38,7 +38,7 @@
         "櫻木会館的頭牌，笑容標價、心事不賣。",
         "一筆還不清的債，把她和破戒僧的路綁在了一起。"
       ],
-      "portrait": "/media/img/char_cherry.webp",
+      "portrait": "media/img/char_cherry.webp",
       "portraitW": 1170,
       "portraitH": 1460,
       "revealed": true
@@ -46,17 +46,17 @@
   ],
   "_todo_gods": "十二神全揭曉（splash 16:9，portraitW/H=1600/900）；章節分配為佔位（ares=1、zeus=12 主席收尾，其餘 2-11 順排），待劇情定稿再調",
   "gods": [
-    { "id": "ares",       "name": "阿瑞斯",     "domain": "戰爭", "chapter": 1,  "revealed": true, "portrait": "/media/img/gods/ares.avif",       "portraitW": 1600, "portraitH": 900 },
-    { "id": "apollo",     "name": "阿波羅",     "domain": "太陽", "chapter": 2,  "revealed": true, "portrait": "/media/img/gods/apollo.avif",     "portraitW": 1600, "portraitH": 900 },
-    { "id": "athena",     "name": "雅典娜",     "domain": "智慧", "chapter": 3,  "revealed": true, "portrait": "/media/img/gods/athena.avif",     "portraitW": 1600, "portraitH": 900 },
-    { "id": "hermes",     "name": "荷米斯",     "domain": "傳訊", "chapter": 4,  "revealed": true, "portrait": "/media/img/gods/hermes.avif",     "portraitW": 1600, "portraitH": 900 },
-    { "id": "poseidon",   "name": "波賽頓",     "domain": "海洋", "chapter": 5,  "revealed": true, "portrait": "/media/img/gods/poseidon.avif",   "portraitW": 1600, "portraitH": 900 },
-    { "id": "aphrodite",  "name": "阿芙蘿黛蒂", "domain": "愛慾", "chapter": 6,  "revealed": true, "portrait": "/media/img/gods/aphrodite.avif",  "portraitW": 1600, "portraitH": 900 },
-    { "id": "artemis",    "name": "阿提米絲",   "domain": "狩獵", "chapter": 7,  "revealed": true, "portrait": "/media/img/gods/artemis.avif",    "portraitW": 1600, "portraitH": 900 },
-    { "id": "demeter",    "name": "狄蜜特",     "domain": "豐收", "chapter": 8,  "revealed": true, "portrait": "/media/img/gods/demeter.avif",    "portraitW": 1600, "portraitH": 900 },
-    { "id": "dionysus",   "name": "戴歐尼修斯", "domain": "酒宴", "chapter": 9,  "revealed": true, "portrait": "/media/img/gods/dionysus.avif",   "portraitW": 1600, "portraitH": 900 },
-    { "id": "hephaestus", "name": "赫菲斯托斯", "domain": "鍛造", "chapter": 10, "revealed": true, "portrait": "/media/img/gods/hephaestus.avif", "portraitW": 1600, "portraitH": 900 },
-    { "id": "hera",       "name": "赫拉",       "domain": "婚姻", "chapter": 11, "revealed": true, "portrait": "/media/img/gods/hera.avif",       "portraitW": 1600, "portraitH": 900 },
-    { "id": "zeus",       "name": "宙斯",       "domain": "雷霆", "chapter": 12, "revealed": true, "portrait": "/media/img/gods/zeus.avif",       "portraitW": 1600, "portraitH": 900 }
+    { "id": "ares",       "name": "阿瑞斯",     "domain": "戰爭", "chapter": 1,  "revealed": true, "portrait": "media/img/gods/ares.avif",       "portraitW": 1600, "portraitH": 900 },
+    { "id": "apollo",     "name": "阿波羅",     "domain": "太陽", "chapter": 2,  "revealed": true, "portrait": "media/img/gods/apollo.avif",     "portraitW": 1600, "portraitH": 900 },
+    { "id": "athena",     "name": "雅典娜",     "domain": "智慧", "chapter": 3,  "revealed": true, "portrait": "media/img/gods/athena.avif",     "portraitW": 1600, "portraitH": 900 },
+    { "id": "hermes",     "name": "荷米斯",     "domain": "傳訊", "chapter": 4,  "revealed": true, "portrait": "media/img/gods/hermes.avif",     "portraitW": 1600, "portraitH": 900 },
+    { "id": "poseidon",   "name": "波賽頓",     "domain": "海洋", "chapter": 5,  "revealed": true, "portrait": "media/img/gods/poseidon.avif",   "portraitW": 1600, "portraitH": 900 },
+    { "id": "aphrodite",  "name": "阿芙蘿黛蒂", "domain": "愛慾", "chapter": 6,  "revealed": true, "portrait": "media/img/gods/aphrodite.avif",  "portraitW": 1600, "portraitH": 900 },
+    { "id": "artemis",    "name": "阿提米絲",   "domain": "狩獵", "chapter": 7,  "revealed": true, "portrait": "media/img/gods/artemis.avif",    "portraitW": 1600, "portraitH": 900 },
+    { "id": "demeter",    "name": "狄蜜特",     "domain": "豐收", "chapter": 8,  "revealed": true, "portrait": "media/img/gods/demeter.avif",    "portraitW": 1600, "portraitH": 900 },
+    { "id": "dionysus",   "name": "戴歐尼修斯", "domain": "酒宴", "chapter": 9,  "revealed": true, "portrait": "media/img/gods/dionysus.avif",   "portraitW": 1600, "portraitH": 900 },
+    { "id": "hephaestus", "name": "赫菲斯托斯", "domain": "鍛造", "chapter": 10, "revealed": true, "portrait": "media/img/gods/hephaestus.avif", "portraitW": 1600, "portraitH": 900 },
+    { "id": "hera",       "name": "赫拉",       "domain": "婚姻", "chapter": 11, "revealed": true, "portrait": "media/img/gods/hera.avif",       "portraitW": 1600, "portraitH": 900 },
+    { "id": "zeus",       "name": "宙斯",       "domain": "雷霆", "chapter": 12, "revealed": true, "portrait": "media/img/gods/zeus.avif",       "portraitW": 1600, "portraitH": 900 }
   ]
 }

@@ -155,7 +155,7 @@ function buildWoodfishCabinet(): HTMLElement {
   const screen = document.createElement('div');
   screen.className = 'arcade-screen arcade-screen--woodfish';
   const img = document.createElement('img');
-  img.src = '/media/img/woodfish.webp';
+  img.src = 'media/img/woodfish.webp';
   img.alt = '';
   img.loading = 'lazy';
   img.width = 512;
@@ -299,7 +299,7 @@ function buildOverlayContent(): void {
 
   woodfishImgEl = document.createElement('img');
   woodfishImgEl.className = 'woodfish-img';
-  (woodfishImgEl as HTMLImageElement).src = '/media/img/woodfish.webp';
+  (woodfishImgEl as HTMLImageElement).src = 'media/img/woodfish.webp';
   (woodfishImgEl as HTMLImageElement).alt = '';
   tapArea.appendChild(woodfishImgEl);
 
@@ -321,7 +321,7 @@ function buildOverlayContent(): void {
   unlockBody.textContent = S.woodfishUnlockBody || '108 記木魚，功德圓滿——結緣桌布已解鎖';
   const downloadBtn = document.createElement('a');
   downloadBtn.className = 'cut-btn woodfish-download-btn';
-  downloadBtn.href = '/media/img/wallpaper_phone.png';
+  downloadBtn.href = 'media/img/wallpaper_phone.png';
   downloadBtn.setAttribute('download', '');
   downloadBtn.setAttribute('data-todo', '');
   downloadBtn.textContent = S.woodfishDownloadLabel || '下載結緣桌布';
