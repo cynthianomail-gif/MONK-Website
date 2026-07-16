@@ -4,12 +4,11 @@
 // 背景不放影片，改用靜態 poster（bg_battle_temple 轉檔）；<video> 結構照 spec 寫好、
 // source 留 data-src 空掛＋data-placeholder 標記，日後補影片檔即生效（lazyVideo 接手）。
 //
-// 互動：pointermove ±8px 視差（lerp）、往下捲 scale 1→0.92（scrub）、
-// PV lightbox 骨架（滿版黑底＋關閉鈕＋Esc 可關＋開時 lenis.stop()）。
+// 互動：pointermove ±8px 視差（lerp）、往下捲 scale 1→0.92（scrub）。
+// PV／Demo 皆為外部連結（SharePoint），2026-07-17 起不再用站內 lightbox。
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { lenis } from '../core/scroll';
 import { prefersReducedMotion } from '../core/utils';
 import { initSuminagashi } from '../core/suminagashi';
 
@@ -59,46 +58,6 @@ function initScrollScale(extraTargets: Element[]) {
   );
 }
 
-// ---- PV lightbox 骨架（內容佔位「PV 製作中」，影片到位後換 <video>） ----
-
-function initLightbox() {
-  const box = document.getElementById('pv-lightbox');
-  const openBtn = document.querySelector<HTMLButtonElement>('.hero-pv-btn');
-  const closeBtn = box?.querySelector<HTMLButtonElement>('.pv-lightbox-close') ?? null;
-  if (!box || !openBtn || !closeBtn) return;
-
-  let lastFocus: HTMLElement | null = null;
-
-  const open = () => {
-    lastFocus = document.activeElement as HTMLElement | null;
-    box.hidden = false;
-    lenis?.stop(); // 開啟時背景不可捲動（spec §5.2）
-    document.body.style.overflow = 'hidden'; // reduced-motion（無 lenis）路徑同樣鎖捲動
-    closeBtn.focus();
-    document.addEventListener('keydown', onKeydown);
-  };
-
-  const close = () => {
-    box.hidden = true;
-    lenis?.start();
-    document.body.style.overflow = '';
-    document.removeEventListener('keydown', onKeydown);
-    // 焦點還給開啟者；追不到（如 body）就還給 PV 鈕，鍵盤使用者不迷路
-    (lastFocus && lastFocus !== document.body ? lastFocus : openBtn).focus();
-  };
-
-  const onKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') close();
-  };
-
-  openBtn.addEventListener('click', open);
-  closeBtn.addEventListener('click', close);
-  // 點黑底（非內容區）也可關
-  box.addEventListener('click', (e) => {
-    if (e.target === box) close();
-  });
-}
-
 // ---- M2.5 suminagashi 墨流體背景（spec §6.5） ----
 // null＝降級（WebGL 不可用／reduced-motion）→ 不加 class、poster 靜態背景自然露出。
 // 成功時加 hero--fluid：藏 hero-shade、前景文字轉墨黑（paper 底上的對比，hero.css）。
@@ -108,4 +67,3 @@ if (fluid && hero) hero.classList.add('hero--fluid');
 
 initParallax();
 initScrollScale(fluid ? [fluid.canvas] : []);
-initLightbox();
