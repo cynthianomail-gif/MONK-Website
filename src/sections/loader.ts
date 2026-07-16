@@ -51,8 +51,6 @@ async function enter(center: { x: number; y: number }, forceFallback: boolean) {
   // inkReveal 同步掛上遮罩 overlay（WebGL canvas 或 main clip-path），loader 即可先移除。
   const reveal = inkReveal(center, { forceFallback });
   loader.remove();
-  // 廣播進站完成（hero 墨流靠此時機落筆円相，晚訂閱者自查 loader 是否已不在 DOM）
-  window.dispatchEvent(new CustomEvent('monk:entered'));
   lenis?.start();
   await reveal;
 }
