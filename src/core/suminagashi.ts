@@ -19,6 +19,10 @@ import { prefersReducedMotion } from './utils';
 export interface SuminagashiHandle {
   /** 模組自建插入 container 的 canvas（hero.ts 需把 scroll scale scrub 一併套上）。 */
   canvas: HTMLCanvasElement;
+  /** 円相 2D 覆蓋層（同上，scrub 目標要一併帶上）。 */
+  ensoCanvas: HTMLCanvasElement;
+  /** 落筆円相（延遲 delayMs 後開始）。初始化後不會自動畫，由呼叫端在 loader 收掉時觸發。 */
+  enso(delayMs?: number): void;
   destroy(): void;
 }
 
@@ -41,6 +45,16 @@ const AUTO_MIN_MS = 4000; // 自動漩渦間隔 4–6s
 const AUTO_MAX_MS = 6000;
 const FPS_FLOOR = 30; // 連續 2s 低於此值 → sim 解析度砍半（一次為限）
 const FPS_FLOOR_MS = 2000;
+
+// 開場円相（禪僧一筆墨圓，2026-07-16 使用者指定的進場符號）
+const ENSO_DELAY_MS = 350; // 進場靜置一拍再落筆
+const ENSO_DRAW_MS = 1400; // 一筆行筆時間
+const ENSO_HOLD_MS = 3600; // 畫畢停留
+const ENSO_FADE_MS = 2000; // 覆蓋層淡出（同時把軟墨印進染料場）
+const ENSO_SWEEP = Math.PI * 1.86; // 收筆不封口，留約 25° 缺口（円相不閉圓）
+const ENSO_START = Math.PI * 0.62; // 起筆於左上，順時針行筆
+const ENSO_RADIUS = 0.0012; // 融墨印半徑（exp(-d²/r) 的 r，軟暈）
+const ENSO_STEP = 0.008; // 相鄰墨點的進度間隔
 
 const PAPER: [number, number, number] = [0.949, 0.918, 0.847]; // --paper #f2ead8
 
@@ -621,6 +635,125 @@ export function initSuminagashi(container: HTMLElement): SuminagashiHandle | nul
   container.addEventListener('pointercancel', onPointerEnd, { passive: true });
   container.addEventListener('pointerleave', onPointerEnd, { passive: true });
 
+  // ---- 開場円相 ----
+  // 教訓（2026-07-16）：符號直接畫進流體會被湍流在一兩秒內攪成霧——
+  // 實筆円相畫在 2D 覆蓋層（勾筆→停留→淡出），淡出同時沿軌跡把軟墨印進染料場，
+  // 視覺上筆跡「融入水面」。待命狀態：不自動畫，等 handle.enso()（loader 收掉）觸發。
+
+  const ensoCanvas = document.createElement('canvas');
+  ensoCanvas.style.cssText =
+    'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;will-change:transform,opacity;';
+  ensoCanvas.setAttribute('aria-hidden', 'true');
+  const ensoCtx = ensoCanvas.getContext('2d');
+
+  const sizeEnsoCanvas = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, DPR_MAX);
+    ensoCanvas.width = Math.max(1, Math.round(container.clientWidth * dpr));
+    ensoCanvas.height = Math.max(1, Math.round(container.clientHeight * dpr));
+  };
+  sizeEnsoCanvas();
+
+  let ensoT0 = Infinity; // 覆蓋層起筆時刻
+  let ensoDrawn = 0; // 覆蓋層已畫進度 [0..1]
+  let ensoArmed = false;
+  let ensoDone = true; // 覆蓋層已淡出完畢
+  let ensoDyeT0 = Infinity; // 融墨印起始時刻
+  let ensoDyeNext = 1.01; // 融墨印進度；>1＝未啟動/已完成
+
+  const beginEnso = (delayMs: number) => {
+    ensoArmed = true;
+    ensoDone = false;
+    ensoT0 = performance.now() + delayMs;
+    ensoDrawn = 0;
+    ensoDyeT0 = Infinity;
+    ensoDyeNext = 1.01;
+    ensoCanvas.style.opacity = '1';
+    ensoCtx?.clearRect(0, 0, ensoCanvas.width, ensoCanvas.height);
+    // 保護期：符號在場期間不放 idle 漩渦
+    lastInteract = ensoT0 + ENSO_DRAW_MS + ENSO_HOLD_MS + ENSO_FADE_MS;
+    nextAutoAt = lastInteract + IDLE_MS;
+  };
+
+  /** 筆壓：起筆重、行筆漸提、收筆出鋒。 */
+  const ensoThick = (t: number) => {
+    const taper = t > 0.88 ? (1 - t) / 0.12 : 1;
+    return (1.2 - 0.45 * t) * taper;
+  };
+
+  const drawEnsoOverlay = (now: number) => {
+    if (!ensoArmed || ensoDone || !ensoCtx) return;
+    const t = now - ensoT0;
+    if (t < 0) return;
+    const w = ensoCanvas.width;
+    const h = ensoCanvas.height;
+    const rPx = Math.min(h * 0.3, w * 0.36);
+    const brush = h * 0.014;
+    const dp = Math.min(1, t / ENSO_DRAW_MS);
+    while (ensoDrawn <= dp) {
+      const p = ensoDrawn;
+      ensoDrawn += ENSO_STEP;
+      const thick = ensoThick(p) * (0.85 + Math.random() * 0.3);
+      if (thick <= 0.05) continue;
+      const th = ENSO_START - ENSO_SWEEP * p;
+      const x = w / 2 + rPx * Math.cos(th);
+      const y = h / 2 - rPx * Math.sin(th);
+      const rr = brush * thick;
+      // 半透明暈邊＋實心主筆兩層，湊毛筆的滲墨感
+      ensoCtx.fillStyle = 'rgba(20,18,15,0.28)';
+      ensoCtx.beginPath();
+      ensoCtx.arc(
+        x + (Math.random() - 0.5) * rr * 0.6,
+        y + (Math.random() - 0.5) * rr * 0.6,
+        rr * 1.35, 0, Math.PI * 2
+      );
+      ensoCtx.fill();
+      ensoCtx.fillStyle = 'rgba(20,18,15,0.92)';
+      ensoCtx.beginPath();
+      ensoCtx.arc(x, y, rr, 0, Math.PI * 2);
+      ensoCtx.fill();
+    }
+    // 停留後淡出；淡出起點啟動融墨印
+    const fadeT = t - ENSO_DRAW_MS - ENSO_HOLD_MS;
+    if (fadeT >= 0) {
+      if (ensoDyeT0 === Infinity) {
+        ensoDyeT0 = now;
+        ensoDyeNext = 0;
+      }
+      const a = 1 - fadeT / ENSO_FADE_MS;
+      ensoCanvas.style.opacity = String(Math.max(0, Math.min(1, a)));
+      if (a <= 0) {
+        ensoDone = true;
+        ensoCtx.clearRect(0, 0, w, h);
+      }
+    }
+  };
+
+  /** 融墨印：覆蓋層淡出時，沿同一軌跡把軟暈淡墨印進染料場（墨落靜水，零速度）。 */
+  const stampEnsoDye = (now: number) => {
+    if (ensoDyeNext > 1 || now < ensoDyeT0) return;
+    const t1 = Math.min(1, (now - ensoDyeT0) / ENSO_FADE_MS);
+    const aspect = canvas.width / Math.max(1, canvas.height);
+    const r = Math.min(0.3, 0.36 * aspect); // 與覆蓋層 rPx 同一比例（y 佔比）
+    let n = 0;
+    while (ensoDyeNext <= t1 && n < 8) {
+      const t = ensoDyeNext;
+      ensoDyeNext += ENSO_STEP * 2;
+      n++;
+      const thick = ensoThick(t);
+      if (thick <= 0.05) continue;
+      const th = ENSO_START - ENSO_SWEEP * t;
+      enqueueSplat(
+        0.5 + (r * Math.cos(th)) / aspect,
+        0.5 + r * Math.sin(th),
+        0, 0,
+        0.28 * thick,
+        ENSO_RADIUS * thick,
+        ABSORBS[0] // 恆用墨黑
+      );
+    }
+    if (t1 >= 1) ensoDyeNext = 1.01;
+  };
+
   // ---- 模擬步 ----
 
   const correctRadius = (r: number) => {
@@ -812,6 +945,8 @@ export function initSuminagashi(container: HTMLElement): SuminagashiHandle | nul
       );
     }
 
+    drawEnsoOverlay(now);
+    stampEnsoDye(now);
     step(dt);
     render();
 
@@ -857,21 +992,17 @@ export function initSuminagashi(container: HTMLElement): SuminagashiHandle | nul
       sizeCanvas();
       initSimFBOs();
       initDyeFBO();
+      sizeEnsoCanvas(); // 重設尺寸會清空 2D 內容
+      // 覆蓋層還在場（未淡完）就重新勾一次；已淡出則不再打擾
+      if (ensoArmed && !ensoDone) beginEnso(ENSO_DELAY_MS);
     }, 200);
   };
   window.addEventListener('resize', onResize);
 
   container.appendChild(canvas);
+  container.appendChild(ensoCanvas); // 覆蓋層疊在流體 canvas 之上
 
-  // 開場：三滴不同色的靜置墨滴（傳統墨流し起手＝滴墨），避免進站時一片空白
-  for (let i = 0; i < 3; i++) {
-    colorIdx = i;
-    enqueueSplat(
-      0.32 + i * 0.18, 0.38 + (i % 2) * 0.22,
-      (Math.random() - 0.5) * 240, (Math.random() - 0.5) * 240,
-      0.9, RADIUS_DROP * 0.8, currentAbsorb()
-    );
-  }
+  // 開場改由円相開筆（drawEnsoOverlay）：進站畫面即符號，不再滴三色墨
 
   // 先渲染一幀（紙色），避免 canvas 插入後首幀黑閃
   step(1 / 60);
@@ -884,6 +1015,10 @@ export function initSuminagashi(container: HTMLElement): SuminagashiHandle | nul
 
   return {
     canvas,
+    ensoCanvas,
+    enso(delayMs = ENSO_DELAY_MS) {
+      beginEnso(delayMs);
+    },
     destroy() {
       destroyed = true;
       stop();
@@ -901,6 +1036,7 @@ export function initSuminagashi(container: HTMLElement): SuminagashiHandle | nul
       divergence?.dispose();
       curl?.dispose();
       canvas.remove();
+      ensoCanvas.remove();
       fpsEl?.remove();
       if (debug) delete (window as unknown as Record<string, unknown>).__fluidStats;
       (gl.getExtension('WEBGL_lose_context') as { loseContext(): void } | null)?.loseContext();

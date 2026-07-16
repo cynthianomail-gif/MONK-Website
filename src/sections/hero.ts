@@ -106,6 +106,20 @@ function initLightbox() {
 const fluid = hero ? initSuminagashi(hero) : null;
 if (fluid && hero) hero.classList.add('hero--fluid');
 
+// 進站符號：loader 收掉後墨流落筆円相（晚 650ms 讓墨暈揭示先走完前段）。
+// loader 已不在 DOM（理論上不會，防未來拿掉 loader）就直接落筆。
+if (fluid) {
+  if (document.getElementById('loader')) {
+    window.addEventListener('monk:entered', () => fluid.enso(650), { once: true });
+  } else {
+    fluid.enso();
+  }
+  // ?fluid=debug：console 手動重畫円相（調參用）
+  if (new URLSearchParams(location.search).get('fluid') === 'debug') {
+    (window as unknown as Record<string, unknown>).__enso = () => fluid.enso(0);
+  }
+}
+
 initParallax();
-initScrollScale(fluid ? [fluid.canvas] : []);
+initScrollScale(fluid ? [fluid.canvas, fluid.ensoCanvas] : []);
 initLightbox();
