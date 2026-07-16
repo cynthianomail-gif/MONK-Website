@@ -34,3 +34,17 @@
 | BGM 60s | PV 音樂剪短（等 PV） | ⬜ |
 | 影片 loop/截圖 | 遊戲實錄 | ⬜ |
 | 立繪 | 現成，轉 webp | ⬜ |
+
+## 07-15 部署修復＋回饋批（主對話親做）
+
+| 項目 | 狀態 | 產出 | 下一步 |
+|---|---|---|---|
+| GitHub Pages 圖片全 404 修復 | ✅ 結案（commit e8ad3a4＋gh-pages 重佈；線上實測 media 全 200） | 7 檔 `/media/`→`media/` 相對路徑；部署管道確立=gh-pages 分支+`npx gh-pages -d dist` | ⚠鐵則：JSON/TS 字串媒體路徑只准相對 `media/...` |
+| 故事段背景太暗→亮調換裝 | ✅ 結案（commit 256ef64；生成 2 候選使用者選 A、裁卷軸框、去 0.92 透明度） | public/media/img/story_mid.webp（2474×1080）；舊暗版+候選存 _art_src | — |
+| 十二神卡＝因緣+命脈 | ✅ 結案（同 commit；框框=十二因緣、名下命脈行，章序照主線 spec 定稿：ares1/hermes2/poseidon3/demeter4/hephaestus5/aphrodite6/apollo7/dionysus8/artemis9/athena10/hera11/zeus12） | characters.json/characters.ts/characters.css | M6 表格「章節配置佔位」已解除 |
+| 遊藝場只留三款 | ✅ 結案（同 commit；砍保齡球+打擊籠，「五台街機」→「三台街機」，玩法四象列點同步） | arcade.json/strings.json/index.html/gameplay.json | — |
+| 繪馬堂去角色單圖 | ✅ 結案（同 commit；移除無戒/了塵/阿瑞斯 3 筆，餘 16 圖） | gallery.json | — |
+| wallpaper_phone.png 接線 | ✅ 結案（同 commit；_art_src 現成檔複製進 public，木魚 108 桌布下載 404 解除） | public/media/img/wallpaper_phone.png（4.4MB） | — |
+| 故事段背景 v2（07-15 使用者退回 v1） | ✅ 結案（commit c50b986；v1 和風明信片調性不搭遊戲→改上傳 keyart_main.png 當 style reference 重生 2 候選，使用者選 A） | public/media/img/story_mid.webp（2160×1080）；候選 story_v2_a/b.jpg 存 _art_src | ⚠教訓：官網生圖必帶遊戲美術當風格參照，純文字 prompt 會漂 |
+| Hero 進場円相（07-16 使用者要求進場符號） | ✅ 結案（commit 0835036；使用者拍板円相「墨流一筆畫成」；太極=道教已說明） | suminagashi.ts 円相雙軌制+monk:entered 事件+hero 接線 | ⚠流體教訓：符號 splat 進流體必被湍流攪散（三輪參數皆敗），可辨識符號走 2D 覆蓋層、融墨印零速度；?fluid=debug 有 __enso 重畫鉤子 |
+| 円相進場（07-16 使用者看過實機後退回） | ↩️ 已 revert（使用者裁定「有點醜」，revert commit 見 git log；三滴墨開場還原） | — | 若日後再做進場符號：技術結論仍有效（覆蓋層+融墨雙軌），美術方向要先出視覺 mock 給使用者過目再寫程式 |

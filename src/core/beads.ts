@@ -18,7 +18,6 @@ const SECTIONS: { id: string; label: string }[] = [
   { id: 'story', label: '世界' },
   { id: 'characters', label: '眾生' },
   { id: 'gameplay', label: '玩法' },
-  { id: 'parlor', label: '遊藝場' },
   { id: 'gallery', label: '畫廊' },
   { id: 'footer', label: '結緣' },
 ];

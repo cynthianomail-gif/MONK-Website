@@ -37,10 +37,11 @@
       <div class="section-inner hero-fg">
         <!-- Logo 圖未到位：文字排版佔位（Noto Serif TC 900），等 Codex logo -->
         <h1 id="hero-heading" class="hero-logo" data-todo>和尚逆天</h1>
-        <p class="hero-tagline"><!-- TODO: strings.json --> 破戒之僧，逆天而行——佔位文案，正式文案待 strings.json 接入</p>
+        <p class="hero-tagline">破戒之僧，逆天而行</p>
         <div class="hero-cta-row">
           <button class="cut-btn hero-pv-btn" type="button">▶ 觀看完整 PV</button>
-          <a class="cut-btn" href="#" data-todo>下載 Demo</a>
+          <a class="cut-btn" href="https://wanintw-my.sharepoint.com/:u:/g/personal/annie_lee_wanin_tw/IQANqyHtdj-wT4r8bnk2v6a7AbbxW6g7Iv1uSWWGJh2H3a0?e=ELq0PU"
+             target="_blank" rel="noopener">下載 Demo</a>
         </div>
       </div>
     </section>
@@ -89,33 +90,20 @@
       <div class="quad-grid" aria-hidden="true"></div>
     </section>
 
-    <!-- 5. Parlor -->
-    <section id="parlor" aria-labelledby="parlor-heading">
-      <h2 id="parlor-heading" data-en="UNDERGROUND PARLOR">地下遊藝場</h2>
-      <p data-intro>三台街機，賭上功德</p>
-      <div class="arcade-wrap">
-        <div class="arcade-row" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- 6. Gallery -->
+    <!-- 5. Gallery（原 6；地下遊藝場區塊 2026-07-17 使用者指示整段移除） -->
     <section id="gallery" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading" data-en="EMA GALLERY">繪馬堂</h2>
       <p data-intro>一景一願，皆掛於此</p>
       <div class="gallery-marquee" aria-hidden="true"></div>
     </section>
 
-    <!-- 7. Footer -->
+    <!-- 6. Footer -->
     <section id="footer" aria-labelledby="footer-heading">
       <h2 id="footer-heading" class="sr-only">頁尾</h2>
       <button class="footer-woodfish-btn" type="button" aria-label="敲一下木魚">
         <img class="footer-logo" src="/media/img/woodfish.webp" alt="" width="512" height="512" loading="lazy" />
       </button>
       <p data-tagline>破戒之僧，逆天而行。</p>
-      <div class="footer-sns">
-        <a href="#" data-todo aria-label="X">X</a>
-        <a href="#" data-todo aria-label="YouTube">YouTube</a>
-      </div>
       <p class="footer-credit"></p>
     </section>
   </main>
@@ -124,13 +112,6 @@
   <div id="pv-lightbox" role="dialog" aria-modal="true" aria-label="完整 PV" hidden>
     <button class="pv-lightbox-close" type="button" aria-label="關閉">✕</button>
     <p class="pv-lightbox-placeholder" data-todo>PV 製作中</p>
-  </div>
-
-  <!-- 電子木魚彩蛋 overlay（§5.6／§6.4；parlor.ts 接線，DOM 由 parlor.ts 動態建立內容，
-       此處僅留容器與 aria 骨架，內容於 initWoodfishGame() 時填入） -->
-  <div id="woodfish-overlay" role="dialog" aria-modal="true" aria-label="功德無量" hidden>
-    <button class="woodfish-close" type="button" aria-label="關閉">✕</button>
-    <div class="woodfish-stage"></div>
   </div>
 
   <script type="module" src="/src/main.ts"></script>

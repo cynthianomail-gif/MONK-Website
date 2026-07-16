@@ -37,7 +37,6 @@ import './styles/sections/hero.css';
 import './styles/sections/story.css';
 import './styles/sections/characters.css';
 import './styles/sections/gameplay.css';
-import './styles/sections/parlor.css';
 import './styles/sections/gallery.css';
 import './styles/sections/footer.css';
 
@@ -57,7 +56,6 @@ import './sections/hero';
 import './sections/story';
 import './sections/characters';
 import './sections/gameplay';
-import './sections/parlor';
 import './sections/gallery';
 import './sections/footer';
 
