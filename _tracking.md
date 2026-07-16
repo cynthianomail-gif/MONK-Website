@@ -48,3 +48,4 @@
 | 故事段背景 v2（07-15 使用者退回 v1） | ✅ 結案（commit c50b986；v1 和風明信片調性不搭遊戲→改上傳 keyart_main.png 當 style reference 重生 2 候選，使用者選 A） | public/media/img/story_mid.webp（2160×1080）；候選 story_v2_a/b.jpg 存 _art_src | ⚠教訓：官網生圖必帶遊戲美術當風格參照，純文字 prompt 會漂 |
 | Hero 進場円相（07-16 使用者要求進場符號） | ✅ 結案（commit 0835036；使用者拍板円相「墨流一筆畫成」；太極=道教已說明） | suminagashi.ts 円相雙軌制+monk:entered 事件+hero 接線 | ⚠流體教訓：符號 splat 進流體必被湍流攪散（三輪參數皆敗），可辨識符號走 2D 覆蓋層、融墨印零速度；?fluid=debug 有 __enso 重畫鉤子 |
 | 円相進場（07-16 使用者看過實機後退回） | ↩️ 已 revert（使用者裁定「有點醜」，revert commit 見 git log；三滴墨開場還原） | — | 若日後再做進場符號：技術結論仍有效（覆蓋層+融墨雙軌），美術方向要先出視覺 mock 給使用者過目再寫程式 |
+| 07-17 回饋批（主對話親做） | ✅ 結案（commit d885c28）：①hero 標語只留「破戒之僧，逆天而行」②下載 Demo 接使用者 SharePoint 分享連結（2.4GB 超 GitHub Release 2GB 上限、zip 零壓縮率，外部託管）③保齡球三圖換 07-16 新瓶位截圖（源=MONK/_bowling_roll_shot.png）④地下遊藝場區塊整段移除（parlor.ts/css+arcade.json 刪、佛珠導航去遊藝場、woodfish overlay 拆；小遊戲卡與繪馬堂截圖保留）⑤頁尾 X/YT 移除 | index.html/strings.json/main.ts/beads.ts/media | 若要恢復遊藝場：git revert d885c28 的 parlor 部分 |
